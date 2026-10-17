@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexaPrompt AI — Elite Master Prompts & Proven AI Outputs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    :root {
+      color-scheme: dark;
+    }
+
+    html, body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #060913 !important;
+      color: #f8fafc !important;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .premium-dark-bg {
+      background-color: #060913 !important;
+      background-image: 
+        radial-gradient(at 20% 0%, rgba(79, 70, 229, 0.22) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(147, 51, 234, 0.18) 0px, transparent 50%);
+    }
+
+    .nav-surface {
+      background-color: rgba(6, 9, 19, 0.92) !important;
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .pro-card {
+      background-color: #0f172a !important;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+      transition: all 0.22s ease;
+    }
+
+    .pro-card:hover {
+      transform: translateY(-3px);
+      border-color: #6366f1;
+      box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.35);
+    }
+
+    .var-highlight {
+      background-color: rgba(99, 102, 241, 0.28);
+      color: #e0e7ff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      border: 1px dashed #818cf8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col premium-dark-bg">
+
+  <!-- TOP NAVIGATION BAR WITH VISIBLE AUTO-DEPLOY BUTTON -->
+  <header class="sticky top-0 z-40 nav-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">
+              NexaPrompt
+            </span>
+            <span class="text-[11px] font-extrabold px-2.5 py-0.5 rounded-md bg-indigo-500 text-white tracking-wider">
+              AI
+            </span>
+          </div>
+          <p id="nav-subtitle" class="text-xs text-slate-300 hidden sm:block">
+            Master Prompts & Verified Output Library
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Controls: Explore, Saved, Language & ⚡ Auto-Deploy -->
+      <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
+        <button onclick="setSavedFilter(false)" id="btn-explore" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white flex items-center gap-1.5 shadow-md">
+          <i data-lucide="compass" class="w-4 h-4"></i>
+          <span id="txt-explore">Explore</span>
+        </button>
+
+        <button onclick="setSavedFilter(true)" id="btn-saved" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-slate-500 flex items-center gap-1.5">
+          <i data-lucide="bookmark" class="w-4 h-4 text-amber-400"></i>
+          <span id="txt-saved">Saved</span> (<span id="saved-counter">0</span>)
+        </button>
+
+        <!-- Language Toggle (Default EN) -->
+        <div class="flex items-center bg-slate-900 border border-slate-700 rounded-xl p-1">
+          <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white">
+            EN
+          </button>
+          <button onclick="setLanguage('hi')" id="lang-hi" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white">
+            हिंदी
+          </button>
+        </div>
+
+        <!-- ⚡ VISIBLE 1-CLICK AUTO-DEPLOY BUTTON -->
+        <button onclick="openFounderSync()" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-lg shadow-amber-500/20">
+          <i data-lucide="zap" class="w-4 h-4"></i> Auto-Deploy
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-8 text-center">
+    
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900 border border-indigo-500/40 text-indigo-300 text-xs sm:text-sm font-bold mb-6 shadow-md">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+      <span id="hero-badge">Built for Top 1% AI Outputs — Zero Prompt Engineering Needed</span>
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.15] mb-5">
+      <span id="hero-title-1">Unlock Expert AI Results with</span>
+      <span class="bg-gradient-to-r from-indigo-400 via-violet-400 to-fuchsia-400 bg-clip-text text-transparent block sm:inline">
+        Master Prompts
+      </span>
+    </h1>
+
+    <p id="hero-desc" class="text-base sm:text-lg text-slate-200 max-w-2xl mx-auto mb-8 leading-relaxed font-medium">
+      Stop getting average AI replies. Choose your goal across Finance, Deep Research, Study, 4K Video, or Coding — preview the exact output, customize variables, and launch in one click.
+    </p>
+
+    <!-- Large Search Box -->
+    <div class="max-w-2xl mx-auto mb-8">
+      <div class="flex items-center bg-slate-900 border-2 border-slate-700 focus-within:border-indigo-500 rounded-2xl px-4 py-2 shadow-2xl">
+        <i data-lucide="search" class="w-5 h-5 text-indigo-400 mr-3 shrink-0"></i>
+        <input
+          type="text"
+          id="search-box"
+          oninput="renderPromptGrid()"
+          placeholder="Search prompts by topic (e.g., Stock Analysis, Study Notes, 4K Video, Website)..."
+          class="w-full py-2.5 bg-transparent text-base text-white placeholder-slate-400 focus:outline-none font-medium"
+        />
+        <button onclick="resetSearch()" id="clear-search-btn" class="hidden px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-bold text-slate-200 hover:text-white">
+          Clear
+        </button>
+      </div>
+    </div>
+
+    <!-- Wrapped Category Pills -->
+    <div class="flex flex-wrap items-center justify-center gap-2.5">
+      <button onclick="setCategory('All')" data-cat="All" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
+        ✨ All Prompts
+      </button>
+      <button onclick="setCategory('Finance & Markets')" data-cat="Finance & Markets" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400">
+        📊 Finance & Markets
+      </button>
+      <button onclick="setCategory('Study & Research')" data-cat="Study & Research" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400">
+        🎓 Study & Research
+      </button>
+      <button onclick="setCategory('4K Video & Image AI')" data-cat="4K Video & Image AI" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400">
+        🎬 4K Video & Image AI
+      </button>
+      <button onclick="setCategory('Coding & Projects')" data-cat="Coding & Projects" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400">
+        🚀 Coding & Projects
+      </button>
+      <button onclick="setCategory('Business & Content')" data-cat="Business & Content" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400">
+        ⚡ Business & Content
+      </button>
+    </div>
+
+  </section>
+
+  <!-- MAIN CARDS GRID -->
+  <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-4 pb-20 flex-1">
+    <div id="prompt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-slate-800 bg-slate-950/90 py-8 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-300">
+      <div class="flex items-center gap-2 font-semibold">
+        <span class="text-white font-extrabold">NexaPrompt AI</span>
+        <span>— Precision Prompt Engineering Platform</span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 text-xs font-bold bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-xl">
+          <span class="text-slate-400">Language:</span>
+          <button onclick="setLanguage('en')" class="text-white hover:text-indigo-400">English</button>
+          <span>/</span>
+          <button onclick="setLanguage('hi')" class="text-slate-300 hover:text-indigo-400">हिंदी</button>
+        </div>
+
+        <button onclick="openFounderSync()" class="px-3 py-1.5 rounded-xl bg-slate-900 border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center gap-1.5">
+          <i data-lucide="zap" class="w-3.5 h-3.5"></i> Auto-Deploy
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- INTERACTIVE PROMPT STUDIO MODAL -->
+  <div id="studio-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+    <div class="bg-slate-900 border-2 border-slate-700 rounded-3xl max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-2xl flex flex-col">
+      
+      <div class="p-5 sm:p-6 border-b border-slate-800 flex items-start justify-between gap-4 sticky top-0 bg-slate-900 z-10">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span id="m-category" class="text-xs font-extrabold px-3 py-1 rounded-lg bg-indigo-600 text-white"></span>
+            <span id="m-tool" class="text-xs font-bold px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"></span>
+          </div>
+          <h2 id="m-title" class="text-xl sm:text-2xl font-extrabold text-white"></h2>
+          <p id="m-desc" class="text-sm text-slate-300 mt-1 font-medium"></p>
+        </div>
+        <button onclick="closeStudioModal()" class="p-2.5 rounded-xl bg-slate-800 text-slate-200 hover:bg-slate-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="p-5 sm:p-6 space-y-6">
+        
+        <div id="m-vars-section" class="bg-slate-950 border border-indigo-500/40 rounded-2xl p-5">
+          <div class="flex items-center gap-2 mb-3.5">
+            <i data-lucide="sliders" class="w-4 h-4 text-indigo-400"></i>
+            <h3 id="m-step1-label" class="text-xs sm:text-sm font-extrabold text-indigo-300 uppercase tracking-wider">
+              Step 1: Customize Your Topic Variables
+            </h3>
+          </div>
+          <div id="m-vars-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div class="flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <span id="m-prompt-label" class="text-xs font-extrabold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+                <i data-lucide="terminal" class="w-4 h-4"></i> Ready-to-Use Master Prompt
+              </span>
+              <button onclick="copyCompiledPrompt()" class="text-xs font-bold text-indigo-400 hover:text-white flex items-center gap-1">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+              </button>
+            </div>
+            <div id="m-live-prompt" class="flex-1 p-4 rounded-2xl bg-slate-950 border border-slate-700 text-sm text-slate-100 font-mono-code whitespace-pre-wrap leading-relaxed"></div>
+          </div>
+
+          <div class="flex flex-col">
+            <div class="flex items-center justify-between mb-2">
+              <span id="m-output-label" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i> Expected Output Structure
+              </span>
+            </div>
+            <div id="m-output-preview" class="flex-1 p-4 rounded-2xl bg-slate-950 border border-emerald-500/40 text-sm text-slate-200 whitespace-pre-wrap leading-relaxed font-medium"></div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <button onclick="copyCompiledPrompt()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            <span id="m-copy-btn-txt">Copy Master Prompt</span>
+          </button>
+
+          <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            <span id="m-open-label" class="text-xs font-bold text-slate-300 mr-1">Copy & Run in:</span>
+            <button onclick="copyAndLaunch('https://chatgpt.com')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 text-xs font-bold flex items-center gap-1.5">
+              ChatGPT <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="copyAndLaunch('https://gemini.google.com')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 text-xs font-bold flex items-center gap-1.5">
+              Gemini <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+            <button onclick="copyAndLaunch('https://claude.ai')" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white border border-slate-600 text-xs font-bold flex items-center gap-1.5">
+              Claude <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 1-CLICK AUTO-DEPLOY MODAL -->
+  <div id="founder-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-amber-500/40 rounded-2xl max-w-lg w-full p-5 shadow-2xl">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-base font-extrabold text-amber-300 flex items-center gap-2">
+          <i data-lucide="zap" class="w-5 h-5"></i> 1-Click GitHub & Vercel Auto-Deploy
+        </h3>
+        <button onclick="closeFounderSync()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <p class="text-xs text-slate-300 mb-3">
+        Paste your GitHub Token once (it saves automatically on your tablet), then paste any new code from Gemini to update your live site in 15 seconds.
+      </p>
+      <div class="space-y-3">
+        <input id="gh-pat-input" type="password" placeholder="GitHub Token (ghp_...)" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
+        <textarea id="gh-code-input" rows="5" placeholder="Paste updated <!DOCTYPE html> code here..." class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono-code"></textarea>
+        <button id="gh-push-btn" onclick="deployFromFooter()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2">
+          🚀 Push Live Update Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-emerald-600 text-white px-5 py-3.5 rounded-2xl shadow-2xl font-bold text-sm flex items-center gap-2">
+    <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+    <span id="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <script>
+    let currentLang = 'en';
+    let currentCategory = 'All';
+    let showSavedOnly = false;
+    let savedIds = JSON.parse(localStorage.getItem('nexa_saved_v3') || '[]');
+    let activeItem = null;
+    let userVars = {};
+
+    const uiText = {
+      en: {
+        navSubtitle: 'Master Prompts & Verified Output Library',
+        explore: 'Explore',
+        saved: 'Saved',
+        heroBadge: 'Built for Top 1% AI Outputs — Zero Prompt Engineering Needed',
+        heroTitle1: 'Unlock Expert AI Results with',
+        heroDesc: 'Stop getting average AI replies. Choose your goal across Finance, Deep Research, Study, 4K Video, or Coding — preview the exact output, customize variables, and launch in one click.',
+        searchPlaceholder: 'Search prompts by topic (e.g., Stock Analysis, Study Notes, 4K Video, Website)...',
+        outputPreviewLabel: 'EXPECTED OUTPUT PREVIEW',
+        inputsCountSuffix: 'Custom Inputs',
+        openStudioBtn: 'Open Studio',
+        step1Label: 'Step 1: Enter Your Topic Details Below',
+        promptLabel: 'Ready-to-Use Master Prompt',
+        outputLabel: 'Expected Output Structure',
+        copyBtn: 'Copy Master Prompt',
+        openInLabel: 'Copy & Run in:'
+      },
+      hi: {
+        navSubtitle: 'मास्टर प्रॉम्प्ट्स और वेरिफाइड आउटपुट लाइब्रेरी',
+        explore: 'एक्सप्लोर',
+        saved: 'सेव्ड',
+        heroBadge: 'Top 1% एक्सपर्ट AI आउटपुट पाएं — बिना किसी टेक्निकल झंझट के',
+        heroTitle1: 'हर टॉपिक पर पाएं बेस्ट रिजल्ट और',
+        heroDesc: 'साधारण AI जवाबों से आगे बढ़ें। Finance, Deep Research, Study, 4K Video या Coding में अपना टॉपिक चुनें, सैंपल आउटपुट देखें और 1-क्लिक में मास्टर प्रॉम्प्ट तैयार करें।',
+        searchPlaceholder: 'किसी भी टॉपिक पर प्रॉम्प्ट सर्च करें (जैसे: IPO, Study Notes, 4K Video, Website)...',
+        outputPreviewLabel: 'आउटपुट प्रीव्यू (ऐसा रिजल्ट मिलेगा)',
+        inputsCountSuffix: 'कस्टम इनपुट',
+        openStudioBtn: 'Open Studio',
+        step1Label: 'Step 1: नीचे बॉक्स में अपना टॉपिक भरें',
+        promptLabel: 'आपका तैयार Master Prompt',
+        outputLabel: 'Expected Output (ऐसा रिजल्ट मिलेगा)',
+        copyBtn: 'Copy Master Prompt',
+        openInLabel: 'Copy और सीधे खोलें:'
+      }
+    };
+
+    const masterPrompts = [
+      {
+        id: 'mp1',
+        category: 'Finance & Markets',
+        badge: '🔥 Trending',
+        model: 'Best for: Gemini / ChatGPT',
+        title: {
+          en: 'IPO & Stock 360° Institutional Analyzer',
+          hi: 'IPO और स्टॉक 360° डीप एनालाइजर'
+        },
+        desc: {
+          en: 'Get a complete institutional breakdown of any IPO or stock including business moat, valuation, QIB demand, red flags, and listing gain probability.',
+          hi: 'किसी भी IPO या शेयर के बिजनेस मॉडल, वैल्यूएशन, QIB डिमांड, छुपे हुए रिस्क और लिस्टिंग गेन की संभावना का पूरा विश्लेषण निकालें।'
+        },
+        content: `Act as an elite institutional equity analyst. Perform a 360-degree fundamental and valuation analysis on [COMPANY_OR_IPO_NAME] for [INVESTMENT_GOAL].
+
+Provide a structured breakdown with clear data tables:
+1. Business Model & Competitive Moat
+2. Financial Health (3-Year Revenue CAGR, Profit Margins, Debt-to-Equity & ROE)
+3. Peer Valuation Comparison (P/E, P/B vs Industry Average)
+4. Institutional (QIB/NII) Demand & Grey Market Signals
+5. Top 3 Key Risks / Red Flags
+6. Final Verdict with Confidence Score (%)`,
+        sampleOutput: {
+          en: `📊 1. Business Moat: Commands 34% market share with high switching costs...\n📈 2. Financial Table: Revenue grew at 38% CAGR; Debt-to-Equity reduced to 0.18...\n⚠️ 3. Red Flags: High raw material dependency on top 2 suppliers...\n✅ Verdict: 78% probability of strong listing & long-term compounding.`,
+          hi: `📊 1. बिजनेस मॉडल: कंपनी के पास सेक्टर में 34% मार्केट शेयर है...\n📈 2. फाइनेंशियल टेबल: पिछले 3 साल में प्रॉफिट 38% CAGR से बढ़ा है...\n⚠️ 3. बड़े रिस्क: कच्चे माल के लिए 2 सप्लायर्स पर निर्भरता...\n✅ फाइनल फैसला: मजबूत फंडामेंटल्स के साथ 78% सफलता की संभावना।`
+        }
+      },
+      {
+        id: 'mp2',
+        category: 'Finance & Markets',
+        badge: '⭐ Wealth Pro',
+        model: 'Best for: Gemini / Claude',
+        title: {
+          en: 'Mutual Fund & SIP Portfolio Architect',
+          hi: 'म्यूचुअल फंड और SIP पोर्टफोलियो आर्किटेक्ट'
+        },
+        desc: {
+          en: 'Audit your monthly SIP portfolio across Large, Mid, Small-Cap, and Gold ETFs to eliminate stock overlap and maximize long-term CAGR.',
+          hi: 'अपने Mid-Cap, Small-Cap, Flexi-Cap और Gold ETF पोर्टफोलियो का ओवरलैप चेक करें और रिटर्न बढ़ाने का सटीक प्लान बनाएं।'
+        },
+        content: `Act as a Certified Financial Portfolio Strategist. Review and optimize my monthly SIP of [MONTHLY_SIP_AMOUNT] invested across [CURRENT_FUNDS_LIST] for a horizon of [TIME_HORIZON_YEARS].
+
+Deliver an actionable report covering:
+1. Asset Allocation Health Check (Equity vs Gold/Debt balance)
+2. Hidden Portfolio Overlap Analysis between funds
+3. Drawdown Protection during market corrections
+4. Exact Step-by-Step Rebalancing Plan for maximum risk-adjusted returns.`,
+        sampleOutput: {
+          en: `💰 Portfolio Health Score: 8.6 / 10\n🔍 Overlap Alert: 29% stock overlap detected between your Flexi-Cap and Large-Cap funds...\n🛡️ Crash Protection: Adding 15% Gold ETF allocation reduces max drawdown by 6.4%...`,
+          hi: `💰 पोर्टफोलियो हेल्थ स्कोर: 8.6 / 10\n🔍 ओवरलैप अलर्ट: आपके दो फंड्स में 29% स्टॉक्स एक जैसे हैं...\n🛡️ क्रैश सुरक्षा: 15% Gold ETF रखने से मार्केट गिरावट में पोर्टफोलियो सुरक्षित रहेगा...`
+        }
+      },
+      {
+        id: 'mp3',
+        category: '4K Video & Image AI',
+        badge: '🎬 4K Studio',
+        model: 'Best for: Veo / Sora / Kling AI',
+        title: {
+          en: '4K Photorealistic Cinematic Video Director',
+          hi: '4K सिनेमैटिक AI वीडियो डायरेक्टर'
+        },
+        desc: {
+          en: 'Generate ultra-detailed, studio-grade 4K video prompts with realistic camera movement, 85mm lens depth, lighting, and fabric physics.',
+          hi: 'Veo, Sora या Kling AI के लिए कैमरा एंगल, सिनेमैटिक लाइटिंग और एकदम असली डिटेल्स के साथ 4K वीडियो प्रॉम्प्ट तैयार करें।'
+        },
+        content: `Create an ultra-detailed 4K photorealistic cinematic video prompt featuring [MAIN_SUBJECT_AND_ACTION].
+
+Include these exact production specifications:
+- Wardrobe & Fine Textures: [OUTFIT_AND_STYLING_DETAILS]
+- Environment & Stage Atmosphere: [SCENE_BACKGROUND]
+- Camera & Lens Setup: 85mm prime lens, f/1.8 shallow depth of field, smooth 60fps gimbal tracking motion
+- Lighting & Color Grading: Warm golden hour volumetric rim lighting, natural skin micro-textures, realistic motion physics.`,
+        sampleOutput: {
+          en: `🎥 Ready Video Prompt: "Ultra-photorealistic 4K 60fps cinematic tracking shot of [Subject], intricate fabric textures catching warm golden-hour rim light, shot on 85mm f/1.8 lens with creamy bokeh and realistic motion physics..."`,
+          hi: `🎥 तैयार वीडियो प्रॉम्प्ट: "Ultra-photorealistic 4K 60fps cinematic tracking shot... 85mm लेंस, गोल्डन आवर लाइटिंग और एकदम असली दिखने वाले मूवमेंट और कपड़ों की डिटेलिंग के साथ..."`
+        }
+      },
+      {
+        id: 'mp4',
+        category: 'Study & Research',
+        badge: '🎓 Fast Learning',
+        model: 'Best for: ChatGPT / Gemini',
+        title: {
+          en: 'Zero-to-Expert Topic Masterclass',
+          hi: 'जीरो-टू-एक्सपर्ट टॉपिक मास्टरक्लास'
+        },
+        desc: {
+          en: 'Master any complex subject, exam topic, or technical skill from absolute scratch to advanced level using real-world analogies.',
+          hi: 'किसी भी कठिन विषय, एग्जाम टॉपिक या टेक्निकल स्किल को आसान उदाहरणों के साथ बेसिक से एडवांस लेवल तक समझें।'
+        },
+        content: `Act as a world-class mentor and subject-matter expert. Teach me [TOPIC_OR_SUBJECT] from absolute beginner level to top 1% advanced mastery in [PREFERRED_LANGUAGE].
+
+Structure the lesson into 4 progressive stages:
+1. Simple Real-World Analogy (Explain the core idea effortlessly)
+2. Step-by-Step Architecture & Core Principles
+3. Advanced Insights & Common Mistakes 90% of learners make
+4. A 5-Minute Practical Challenge with solution to lock in my learning.`,
+        sampleOutput: {
+          en: `🧠 Stage 1 (Core Analogy): Think of this concept like a high-speed railway switchboard...\n⚙️ Stage 2 (How It Works): The 3 foundational pillars operate in sequence...\n🚀 Pro Secret: Most beginners overlook the second constraint, which doubles efficiency...`,
+          hi: `🧠 स्टेज 1 (आसान उदाहरण): इसे अपने मोबाइल के सिग्नल नेटवर्क की तरह समझो...\n⚙️ स्टेज 2 (मुख्य सिद्धांत): इसके पीछे 3 मुख्य नियम काम करते हैं...\n🚀 एडवांस सीक्रेट: 90% लोग इस दूसरी स्टेप में गलती करते हैं जिसे सुधारकर आप...`
+        }
+      },
+      {
+        id: 'mp5',
+        category: 'Study & Research',
+        badge: '🔬 Deep Dive',
+        model: 'Best for: Perplexity / Gemini',
+        title: {
+          en: 'First-Principles Deep Research & Matrix',
+          hi: 'डीप रिसर्च और तुलनात्मक डिसीजन रिपोर्ट'
+        },
+        desc: {
+          en: 'Cut through generic internet fluff and generate an empirical research report with pros/cons comparison tables and probability scores.',
+          hi: 'इंटरनेट की सतही बातों को हटाकर किसी भी विषय पर डेटा, तुलनात्मक टेबल और सटीक आंकड़ों के साथ गहरी रिसर्च रिपोर्ट निकालें।'
+        },
+        content: `Conduct a rigorous, first-principles deep research analysis on [RESEARCH_TOPIC] focusing on [KEY_DECISION_OR_QUESTION].
+
+Eliminate generic filler and deliver:
+1. Executive Summary (Top 3 empirical takeaways)
+2. First-Principles Breakdown (Core facts vs popular myths)
+3. Comparative Decision Matrix (Markdown Table comparing Options, Cost, ROI, and Risks)
+4. Actionable Recommendation with Confidence Level (%).`,
+        sampleOutput: {
+          en: `📑 Executive Summary: Empirical data confirms a 3.2x efficiency lead...\n📊 Decision Matrix:\n| Option | Cost | ROI | Risk Level |\n🔮 Final Recommendation (88% Confidence): Prioritize Option A due to lower technical friction.`,
+          hi: `📑 एग्जीक्यूटिव समरी: डेटा के अनुसार पहला विकल्प 3 गुना ज्यादा प्रभावी है...\n📊 तुलनात्मक टेबल:\n| विकल्प | लागत | रिटर्न | रिस्क |\n🔮 निष्कर्ष (88% Confidence): कम लागत और उच्च परिणाम के लिए विकल्प A चुनें।`
+        }
+      },
+      {
+        id: 'mp6',
+        category: 'Coding & Projects',
+        badge: '🚀 No-Code SaaS',
+        model: 'Best for: Claude / Gemini',
+        title: {
+          en: 'Full-Stack Web App & SaaS Architect',
+          hi: 'फुल वेबसाइट और ऐप बिल्डर (बिना कोडिंग)'
+        },
+        desc: {
+          en: 'Generate a complete, responsive, production-ready web application in a single file with modern dark UI and database persistence.',
+          hi: 'बिना कोडिंग सीखे किसी भी आइडिया पर पूरी तरह चालू और आधुनिक वेबसाइट या वेब-ऐप का पूरा कोड एक बार में बनवाएं।'
+        },
+        content: `Act as a Principal Full-Stack Engineer. Build a complete, production-ready single-file HTML, Tailwind CSS, and Vanilla JS web application for [WEB_APP_IDEA].
+
+Include these core specifications:
+- Must-Have Features: [KEY_FEATURES_LIST]
+- High-contrast modern SaaS dark UI optimized for desktop, tablet, and mobile
+- Interactive search, category filters, modals, and localStorage / cloud state management
+- Provide 100% complete, runnable code with zero placeholders.`,
+        sampleOutput: {
+          en: `💻 Output: A 100% complete <!DOCTYPE html> application featuring responsive Bento grid cards, interactive modals, live search filtering, and instant state saving—ready to deploy on Vercel.`,
+          hi: `💻 आउटपुट: 100% तैयार <!DOCTYPE html> कोड जिसमें आधुनिक डार्क डिजाइन, सर्च बार, इंटरैक्टिव बटन और डेटा सेव करने का पूरा सिस्टम जुड़ा होगा।`
+        }
+      }
+    ];
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = uiText[lang];
+
+      document.getElementById('lang-en').className = lang === 'en'
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white';
+      document.getElementById('lang-hi').className = lang === 'hi'
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white';
+
+      document.getElementById('nav-subtitle').innerText = t.navSubtitle;
+      document.getElementById('txt-explore').innerText = t.explore;
+      document.getElementById('txt-saved').innerText = t.saved;
+      document.getElementById('hero-badge').innerText = t.heroBadge;
+      document.getElementById('hero-title-1').innerText = t.heroTitle1;
+      document.getElementById('hero-desc').innerText = t.heroDesc;
+      document.getElementById('search-box').placeholder = t.searchPlaceholder;
+      document.getElementById('m-step1-label').innerText = t.step1Label;
+      document.getElementById('m-prompt-label').innerHTML = `<i data-lucide="terminal" class="w-4 h-4"></i> ${t.promptLabel}`;
+      document.getElementById('m-output-label').innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i> ${t.outputLabel}`;
+      document.getElementById('m-copy-btn-txt').innerText = t.copyBtn;
+      document.getElementById('m-open-label').innerText = t.openInLabel;
+
+      renderPromptGrid();
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30';
+        } else {
+          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400';
+        }
+      });
+      renderPromptGrid();
+    }
+
+    function setSavedFilter(onlySaved) {
+      showSavedOnly = onlySaved;
+      document.getElementById('btn-explore').className = !onlySaved
+        ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white flex items-center gap-1.5 shadow-md'
+        : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-slate-500 flex items-center gap-1.5';
+      document.getElementById('btn-saved').className = onlySaved
+        ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white flex items-center gap-1.5 shadow-md'
+        : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-slate-500 flex items-center gap-1.5';
+      renderPromptGrid();
+    }
+
+    function toggleSave(id, e) {
+      if (e) e.stopPropagation();
+      if (savedIds.includes(id)) {
+        savedIds = savedIds.filter(x => x !== id);
+        triggerToast(currentLang === 'en' ? 'Removed from Saved' : 'Saved से हटा दिया गया');
+      } else {
+        savedIds.push(id);
+        triggerToast(currentLang === 'en' ? '⭐ Saved to your library!' : '⭐ Saved में जुड़ गया!');
+      }
+      localStorage.setItem('nexa_saved_v3', JSON.stringify(savedIds));
+      renderPromptGrid();
+    }
+
+    function resetSearch() {
+      document.getElementById('search-box').value = '';
+      renderPromptGrid();
+    }
+
+    function getVarsFromContent(text) {
+      const m = text.match(/\[([A-Z0-9_]+)\]/g) || [];
+      return [...new Set(m.map(x => x.slice(1, -1)))];
+    }
+
+    function renderPromptGrid() {
+      const grid = document.getElementById('prompt-grid');
+      const q = document.getElementById('search-box').value.trim().toLowerCase();
+      document.getElementById('clear-search-btn').classList.toggle('hidden', !q);
+      document.getElementById('saved-counter').innerText = savedIds.length;
+      const t = uiText[currentLang];
+
+      const list = masterPrompts.filter(item => {
+        const matchSaved = showSavedOnly ? savedIds.includes(item.id) : true;
+        const matchCat = currentCategory === 'All' || item.category === currentCategory;
+        const titleStr = (item.title[currentLang] || item.title.en).toLowerCase();
+        const descStr = (item.desc[currentLang] || item.desc.en).toLowerCase();
+        const matchQ = !q || titleStr.includes(q) || descStr.includes(q) || item.category.toLowerCase().includes(q) || item.content.toLowerCase().includes(q);
+        return matchSaved && matchCat && matchQ;
+      });
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full pro-card rounded-3xl p-10 text-center">
+            <h3 class="text-lg font-extrabold text-white mb-2">No matching prompts found</h3>
+            <p class="text-sm text-slate-300 mb-5">Try clearing your search filter or switching back to All Prompts.</p>
+            <button onclick="setCategory('All'); setSavedFilter(false); resetSearch();" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-bold">
+              Show All Master Prompts
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(item => {
+        const isSaved = savedIds.includes(item.id);
+        const vars = getVarsFromContent(item.content);
+        const titleText = item.title[currentLang] || item.title.en;
+        const descText = item.desc[currentLang] || item.desc.en;
+        const outText = item.sampleOutput[currentLang] || item.sampleOutput.en;
+
+        return `
+          <div onclick="openStudioModal('${item.id}')" class="pro-card rounded-3xl p-6 flex flex-col justify-between cursor-pointer group">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  ${item.category}
+                </span>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    ${item.badge}
+                  </span>
+                  <button onclick="toggleSave('${item.id}', event)" class="p-2 rounded-xl bg-slate-950 border border-slate-700 ${isSaved ? 'text-amber-400' : 'text-slate-400 hover:text-white'}">
+                    <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-amber-400' : ''}"></i>
+                  </button>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-extrabold text-white group-hover:text-indigo-300 transition-colors mb-2.5 leading-snug">
+                ${titleText}
+              </h3>
+              <p class="text-sm text-slate-200 leading-relaxed mb-5 font-medium">
+                ${descText}
+              </p>
+
+              <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 mb-5">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> ${t.outputPreviewLabel}
+                  </span>
+                  <span class="text-[11px] font-semibold text-slate-300">${item.model}</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-200 line-clamp-3 leading-relaxed">
+                  ${outText}
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-200">
+                <i data-lucide="sliders" class="w-4 h-4 text-indigo-400"></i>
+                <span>${vars.length} ${t.inputsCountSuffix}</span>
+              </div>
+              <span class="px-4 py-2.5 rounded-xl bg-indigo-600 group-hover:bg-indigo-500 text-white text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 shadow-md">
+                ${t.openStudioBtn} <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function openStudioModal(id) {
+      activeItem = masterPrompts.find(x => x.id === id);
+      if (!activeItem) return;
+      userVars = {};
+
+      document.getElementById('m-category').innerText = activeItem.category;
+      document.getElementById('m-tool').innerText = activeItem.model;
+      document.getElementById('m-title').innerText = activeItem.title[currentLang] || activeItem.title.en;
+      document.getElementById('m-desc').innerText = activeItem.desc[currentLang] || activeItem.desc.en;
+      document.getElementById('m-output-preview').innerText = activeItem.sampleOutput[currentLang] || activeItem.sampleOutput.en;
+
+      const vars = getVarsFromContent(activeItem.content);
+      const varsGrid = document.getElementById('m-vars-grid');
+      const varsSec = document.getElementById('m-vars-section');
+
+      if (vars.length === 0) {
+        varsSec.classList.add('hidden');
+      } else {
+        varsSec.classList.remove('hidden');
+        varsGrid.innerHTML = vars.map(v => `
+          <div>
+            <label class="text-xs font-extrabold text-slate-200 block mb-1.5">${v.replace(/_/g, ' ')}</label>
+            <input
+              type="text"
+              oninput="onVarInput('${v}', this.value)"
+              placeholder="Enter ${v.toLowerCase().replace(/_/g, ' ')}..."
+              class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-600 rounded-xl text-sm text-white placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+            />
+          </div>
+        `).join('');
+      }
+
+      updateLivePromptBox();
+      document.getElementById('studio-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function onVarInput(k, val) {
+      userVars[k] = val;
+      updateLivePromptBox();
+    }
+
+    function getCompiledPromptString() {
+      if (!activeItem) return '';
+      let out = activeItem.content;
+      Object.keys(userVars).forEach(k => {
+        if (userVars[k] && userVars[k].trim() !== '') {
+          out = out.replaceAll(`[${k}]`, userVars[k]);
+        }
+      });
+      return out;
+    }
+
+    function updateLivePromptBox() {
+      if (!activeItem) return;
+      const html = activeItem.content.replace(/\[([A-Z0-9_]+)\]/g, (m, vName) => {
+        const val = userVars[vName];
+        return `<span class="var-highlight">${val && val.trim() ? val : m}</span>`;
+      });
+      document.getElementById('m-live-prompt').innerHTML = html;
+    }
+
+    function closeStudioModal() {
+      document.getElementById('studio-modal').classList.add('hidden');
+    }
+
+    function copyTextToClipboard(str, msg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(str);
+      } else {
+        const area = document.createElement('textarea');
+        area.value = str;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        document.body.removeChild(area);
+      }
+      triggerToast(msg);
+    }
+
+    function copyCompiledPrompt() {
+      const msg = currentLang === 'en' ? '✨ Master Prompt copied to clipboard!' : '✨ मास्टर प्रॉम्प्ट कॉपी हो गया!';
+      copyTextToClipboard(getCompiledPromptString(), msg);
+    }
+
+    function copyAndLaunch(url) {
+      copyCompiledPrompt();
+      setTimeout(() => window.open(url, '_blank'), 400);
+    }
+
+    function triggerToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 2400);
+    }
+
+    function openFounderSync() {
+      document.getElementById('gh-pat-input').value = localStorage.getItem('gh_pat_token') || '';
+      document.getElementById('founder-modal').classList.remove('hidden');
+    }
+
+    function closeFounderSync() {
+      document.getElementById('founder-modal').classList.add('hidden');
+    }
+
+    async function deployFromFooter() {
+      const token = document.getElementById('gh-pat-input').value.trim();
+      const code = document.getElementById('gh-code-input').value.trim();
+      const btn = document.getElementById('gh-push-btn');
+      if (!token || !code) {
+        alert('Please enter both GitHub Token and HTML Code.');
+        return;
+      }
+      localStorage.setItem('gh_pat_token', token);
+      btn.innerText = '⏳ Updating Live Website...';
+      btn.disabled = true;
+
+      try {
+        const apiUrl = 'https://api.github.com/repos/surya333555/AI-Vault/contents/index.html';
+        const getRes = await fetch(apiUrl, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+        });
+        const fileData = await getRes.json();
+        const encoded = btoa(unescape(encodeURIComponent(code)));
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Update NexaPrompt AI via 1-Click Auto-Deploy',
+            content: encoded,
+            sha: fileData.sha
+          })
+        });
+
+        if (putRes.ok) {
+          closeFounderSync();
+          triggerToast('🚀 Live update pushed! Refresh in 15 seconds.');
+        } else {
+          alert('GitHub Token check failed.');
+        }
+      } catch (e) {
+        alert('Error: ' + e.message);
+      } finally {
+        btn.innerText = '🚀 Push Live Update Now';
+        btn.disabled = false;
+      }
+    }
+
+    setLanguage('en');
+  </script>
+</body>
+</html>
