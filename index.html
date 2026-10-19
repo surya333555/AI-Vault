@@ -68,7 +68,6 @@
   <header class="sticky top-0 z-40 nav-surface">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
       
-      <!-- Brand Identity -->
       <div class="flex items-center gap-3">
         <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-indigo-500 via-violet-600 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
           <i data-lucide="sparkles" class="w-6 h-6 text-white"></i>
@@ -88,7 +87,6 @@
         </div>
       </div>
 
-      <!-- Right Controls -->
       <div class="flex flex-wrap items-center gap-2 sm:gap-2.5">
         <button onclick="setSavedFilter(false)" id="btn-explore" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white flex items-center gap-1.5 shadow-md">
           <i data-lucide="compass" class="w-4 h-4"></i>
@@ -100,7 +98,6 @@
           <span id="txt-saved">Saved</span> (<span id="saved-counter">0</span>)
         </button>
 
-        <!-- Language Switcher (Default EN) -->
         <div class="flex items-center bg-slate-900 border border-slate-700 rounded-xl p-1">
           <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white">
             EN
@@ -110,7 +107,6 @@
           </button>
         </div>
 
-        <!-- ⚡ 1-CLICK AUTO-DEPLOY BUTTON -->
         <button onclick="openFounderSync()" class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-lg shadow-amber-500/20">
           <i data-lucide="zap" class="w-4 h-4"></i> Auto-Deploy
         </button>
@@ -138,7 +134,6 @@
       Short prompts give average answers. Our 5-Layer Mega-Prompts force AI models to use institutional frameworks, hard data tables, anti-fluff locks, and step-by-step execution plans.
     </p>
 
-    <!-- Search Bar -->
     <div class="max-w-2xl mx-auto mb-8">
       <div class="flex items-center bg-slate-900 border-2 border-slate-700 focus-within:border-indigo-500 rounded-2xl px-4 py-2 shadow-2xl">
         <i data-lucide="search" class="w-5 h-5 text-indigo-400 mr-3 shrink-0"></i>
@@ -155,7 +150,6 @@
       </div>
     </div>
 
-    <!-- Category Pills -->
     <div class="flex flex-wrap items-center justify-center gap-2.5">
       <button onclick="setCategory('All')" data-cat="All" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
         ✨ All Mega-Prompts (8)
@@ -285,21 +279,37 @@
     </div>
   </div>
 
-  <!-- 1-CLICK AUTO-DEPLOY MODAL -->
+  <!-- UPGRADED 1-CLICK AUTO-DEPLOY MODAL (AUTO-BLANK CODE BOX + SAFETY LOCK) -->
   <div id="founder-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
     <div class="bg-slate-900 border-2 border-amber-500/40 rounded-2xl max-w-lg w-full p-5 shadow-2xl">
       <div class="flex items-center justify-between mb-3">
         <h3 class="text-base font-extrabold text-amber-300 flex items-center gap-2">
-          <i data-lucide="zap" class="w-5 h-5"></i> 1-Click GitHub & Vercel Auto-Deploy
+          <i data-lucide="zap" class="w-5 h-5"></i> 1-Click Auto-Deploy (Auto-Blank Box)
         </h3>
         <button onclick="closeFounderSync()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <p class="text-xs text-slate-300 mb-3">
-        Paste your GitHub Token once (saves in your browser), then paste new code from Gemini to update nexaprompt-ai.vercel.app in 15 seconds.
-      </p>
-      <div class="space-y-3">
-        <input id="gh-pat-input" type="password" placeholder="GitHub Token (ghp_...)" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
-        <textarea id="gh-code-input" rows="5" placeholder="Paste updated <!DOCTYPE html> code here..." class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono-code"></textarea>
+
+      <div class="space-y-3.5">
+        <div>
+          <label class="text-xs font-bold text-slate-300 block mb-1">Saved GitHub Token:</label>
+          <input id="gh-pat-input" type="password" placeholder="GitHub Token (ghp_...)" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label class="text-xs font-bold text-slate-300">New HTML Code (Always Opens Blank):</label>
+            <div class="flex items-center gap-2">
+              <button onclick="pasteCodeFromClipboard()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold">
+                📋 Paste Code
+              </button>
+              <button onclick="clearDeployCodeBox()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-300 border border-rose-500/30 text-xs font-bold">
+                🗑️ Clear Box
+              </button>
+            </div>
+          </div>
+          <textarea id="gh-code-input" rows="5" placeholder="Box is clean & empty! Paste your new <!DOCTYPE html> code here..." class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono-code"></textarea>
+        </div>
+
         <button id="gh-push-btn" onclick="deployFromFooter()" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm flex items-center justify-center gap-2">
           🚀 Push Live Update Now
         </button>
@@ -402,4 +412,607 @@ Act as a Managing Director of Equity Research & Forensic Accountant at a Tier-1 
         id: 'mp2',
         category: 'Finance & Markets',
         badge: '⭐ Wealth Architect',
-        model: 'Best for: Gemini / Claude /
+        model: 'Best for: Gemini / Claude / ChatGPT',
+        title: {
+          en: 'Mutual Fund & SIP Portfolio Overlap & Alpha Engine',
+          hi: 'म्यूचुअल फंड SIP ओवरलैप और वेल्थ ऑप्टिमाइज़र'
+        },
+        desc: {
+          en: 'Institutional portfolio audit across Large, Mid, Small-Cap, Flexi-Cap, and Gold ETFs with overlap elimination, crash drawdown simulation, and CAGR booster plan.',
+          hi: 'अपने Mid-Cap, Small-Cap, Flexi-Cap और Gold ETF पोर्टफोलियो का पूरा एक्स-रे: फंड ओवरलैप हटाएं, मार्केट क्रैश सेफ्टी चेक करें और लंबी अवधि का वेल्थ प्लान बनाएं।'
+        },
+        content: `[SYSTEM ROLE & PORTFOLIO ARCHITECTURE]
+Act as an Elite Quantitative Wealth Manager & Certified Financial Planner (CFP). Conduct a mathematical and structural portfolio audit on my Systematic Investment Plan (SIP).
+
+[USER PORTFOLIO PARAMETERS]
+- Monthly SIP Commitment: [MONTHLY_SIP_AMOUNT_INR]
+- Current Active Funds & ETFs: [CURRENT_FUNDS_AND_ETFS_LIST]
+- Investment Horizon: [TIME_HORIZON_YEARS]
+- Risk Profile & Target Output Language: [RISK_PROFILE_AND_LANGUAGE]
+
+[STRICT EXECUTION RULES]
+- Do NOT give generic mutual fund definitions.
+- Evaluate rolling returns consistency, downside capture ratio, expense ratio drag, and inter-fund stock overlap.
+
+[MANDATORY 5-STAGE DELIVERABLE]
+1. ASSET ALLOCATION & STYLE BOX AUDIT: Present a Markdown Table breaking down current exposure across Large-Cap, Mid-Cap, Small-Cap, Debt, and Gold/Silver ETFs vs optimal benchmark allocation.
+2. PORTFOLIO OVERLAP & CLUTTER DIAGNOSIS: Identify where multiple funds are buying the same underlying stocks or sectors, causing hidden concentration risk.
+3. MARKET CRASH STRESS TEST: Estimate maximum drawdown (%) during a 25% Nifty correction and evaluate how the Gold ETF / Flexi-Cap cushion performs.
+4. STEP-BY-STEP REBALANCING BLUEPRINT: Exact rupee-by-rupee reallocation of [MONTHLY_SIP_AMOUNT_INR] (Keep / Modify / Replace decisions with reasoning).
+5. WEALTH PROJECTION MATRIX: Project conservative (12%), base (15%), and aggressive (18%) corpus values over [TIME_HORIZON_YEARS] with a 10% annual Step-Up SIP comparison.`,
+        sampleOutput: {
+          en: `💰 1. ALLOCATION AUDIT TABLE:\n| Category | Current % | Optimal % | Action Required |\n| Mid + Small Cap | 58% | 45% | Trim Over-Exposure |\n| Gold ETF Hedge | 10% | 15% | Increase by 5% |\n\n🔍 2. OVERLAP WARNING: 31% stock overlap between your Flexi-Cap and Large & Mid-Cap funds...\n📈 3. CORPUS PROJECTION: Base SIP yields ₹1.42 Cr; adding a 10% annual step-up boosts final wealth to ₹2.38 Cr.`,
+          hi: `💰 1. एसेट एलोकेशन टेबल:\n| कैटेगरी | अभी का हिस्सा | सही हिस्सा | क्या बदलाव करें |\n| Mid + Small Cap | 58% | 45% | रिस्क थोड़ा कम करें |\n| Gold ETF | 10% | 15% | क्रैश सुरक्षा के लिए 5% बढ़ाएं |\n\n🔍 2. ओवरलैप अलर्ट: आपके दो फंड्स में 31% शेयर एक जैसे हैं...\n📈 3. वेल्थ प्रोजेक्शन: 10% सालाना Step-Up जोड़ने पर आपका कुल फंड दोगुना तेजी से बढ़ेगा।`
+        }
+      },
+      {
+        id: 'mp3',
+        category: '4K Video & Image AI',
+        badge: '🎬 4K Master Studio',
+        model: 'Best for: Veo / Sora / Kling / Midjourney',
+        title: {
+          en: '4K Photorealistic Cinema & Choreography Director',
+          hi: '4K सिनेमैटिक AI वीडियो और कोरियोग्राफी डायरेक्टर'
+        },
+        desc: {
+          en: 'Hollywood-grade multi-layer visual prompt generator specifying lens physics, 60fps gimbal trajectories, intricate fabric/henna micro-textures, and volumetric lighting.',
+          hi: 'Veo, Sora, Kling और Midjourney के लिए कैमरा लेंस, 60fps मूवमेंट, कपड़ों की बारीक कढ़ाई, मेहंदी और सिनेमैटिक लाइटिंग के साथ एकदम असली 4K प्रॉम्प्ट बनाएं।'
+        },
+        content: `[SYSTEM ROLE: ACADEMY-AWARD CINEMATOGRAPHER & AI VISUAL DIRECTOR]
+You are an elite AI Video & Photorealistic Prompt Engineer specializing in Google Veo, OpenAI Sora, Kling AI, Runway Gen-3, and Midjourney v6. Transform the user's vision into a studio-grade, physically accurate 4K production prompt Set.
+
+[SCENE & PRODUCTION INPUTS]
+- Primary Subject & Action/Dance Choreography: [SUBJECT_AND_ACTION_DETAILS]
+- Wardrobe, Jewelry & Fine Micro-Details: [ATTIRE_FABRIC_AND_HENNA_DETAILS]
+- Architectural Set & Atmosphere: [ENVIRONMENT_AND_BACKGROUND]
+- Lighting Rig & Color Grading Mood: [LIGHTING_AND_CINEMATIC_MOOD]
+
+[MANDATORY 4-PART OUTPUT DELIVERY]
+1. MASTER VIDEO GENERATION PROMPT (Copy-Paste Ready Block): Write a dense, 120-word photorealistic prompt integrating subject motion physics, fluid cloth simulation, skin pore micro-textures, ARRI Alexa 65 sensor, 85mm anamorphic prime lens at f/1.4, 60fps slow-motion gimbal tracking, and volumetric rim lighting.
+2. CAMERA TRAJECTORY & MOTION SCRIPT: Exact second-by-second camera movement (0s–2s Low-angle push-in, 2s–4s 180-degree orbital arc, 4s–6s close-up rack focus).
+3. ULTRA-HD STILL IMAGE PROMPT (For Midjourney/Flux Base Frame): Optimized with aspect ratio (--ar 16:9 / 9:16), style raw, and photorealistic lighting tokens.
+4. NEGATIVE PROMPT SHIELD: Exact exclusion tokens to prevent deformed hands, limb morphing, plastic skin, or motion blur artifacts.`,
+        sampleOutput: {
+          en: `🎥 1. MASTER 4K VIDEO PROMPT:\n"Ultra-photorealistic 4K 60fps cinematic shot captured on ARRI Alexa 65 with 85mm f/1.4 prime lens. [Subject & Action], wearing [Attire] with hyper-detailed gold zardozi embroidery and dark intricate bridal henna patterns on hands. Dynamic fabric physics as the garment swirls in slow motion, illuminated by warm golden-hour volumetric rim lighting and flickering terracotta diyas..."\n\n🚫 4. NEGATIVE SHIELD: "deformed fingers, extra limbs, plastic skin, uncanny valley, CGI look, frame jitter"`,
+          hi: `🎥 1. मास्टर 4K वीडियो प्रॉम्प्ट (सीधे Veo/Kling में पेस्ट करें):\n"Ultra-photorealistic 4K 60fps cinematic shot captured on ARRI Alexa 65 with 85mm f/1.4 lens..." (इसमें आपके चुने हुए परिधान, भारी कढ़ाई, गहरी मेहंदी, घूमते हुए लहंगे की फिजिक्स और गोल्डन आवर लाइटिंग की पूरी डिटेलिंग अपने आप जुड़ जाएगी)\n\n🎬 2. कैमरा एंगल: 0-2 सेकंड लो-एंगल ट्रैकिंग, 2-5 सेकंड स्लो-मोशन क्लोज़-अप...`
+        }
+      },
+      {
+        id: 'mp4',
+        category: 'Study & Research',
+        badge: '🎓 Cognitive Accelerator',
+        model: 'Best for: Gemini / ChatGPT / Claude',
+        title: {
+          en: 'Zero-to-Top 1% Concept & Exam Mastery Engine',
+          hi: 'जीरो-टू-टॉप 1% टॉपिक और एग्जाम मास्टरी इंजन'
+        },
+        desc: {
+          en: 'Learn any complex subject 5x faster using the Feynman Technique, Pareto 80/20 core principles, visual mental models, and high-yield exam trap questions.',
+          hi: 'किसी भी कठिन विषय, सिलेबस या टेक्निकल स्किल को रटने के बजाय Feynman तकनीक, 80/20 नियम और असली उदाहरणों से बेसिक से एडवांस लेवल तक पक्का सीखें।'
+        },
+        content: `[SYSTEM ROLE: WORLD-CLASS COGNITIVE SCIENTIST & SUBJECT MASTER]
+Act as an elite professor and polymath mentor. Your objective is to take me from [CURRENT_KNOWLEDGE_LEVEL] to Top 1% mastery in [TOPIC_OR_SUBJECT_NAME] optimized for [TARGET_GOAL_OR_EXAM].
+
+[LEARNING PARAMETERS]
+- Target Topic / Chapter: [TOPIC_OR_SUBJECT_NAME]
+- My Current Level: [CURRENT_KNOWLEDGE_LEVEL]
+- Target Exam or Practical Goal: [TARGET_GOAL_OR_EXAM]
+- Preferred Explanation Language: [OUTPUT_LANGUAGE_HINDI_OR_ENGLISH]
+
+[STRICT PEDAGOGICAL RULES]
+- Never dump dry textbook definitions without first building intuition.
+- Use concrete Indian real-life analogies, structured tables, and step-by-step logic chains.
+
+[MANDATORY 5-STAGE MASTERY BLUEPRINT]
+1. THE FEYNMAN INTUITION HOOK: Explain the core essence of [TOPIC_OR_SUBJECT_NAME] using an unforgettable everyday analogy so a 12-year-old could visualize how and why it works.
+2. PARETO 80/20 ARCHITECTURE: Break down the 20% foundational concepts/formulas that drive 80% of all real-world outcomes and exam questions.
+3. DEEP MECHANICS & STEP-BY-STEP WORKED EXAMPLE: Walk through a complex problem or real-world application step-by-step from start to finish, showing the exact reasoning at every turn.
+4. TOP 3 EXAM / PRACTICAL TRAPS: Highlight the exact misconceptions where 90% of students or professionals make mistakes, and how to spot them instantly.
+5. ACTIVE RECALL CHALLENGE: Give me 3 progressive test questions (Easy, Medium, Hard) with hidden answer keys at the bottom to verify my mastery.`,
+        sampleOutput: {
+          en: `🧠 1. FEYNMAN ANALOGY: Imagine this system like the Indian Railway signalling grid at a busy junction...\n📊 2. THE 80/20 CORE PILLARS: Master these 3 equations/rules to solve 85% of advanced problems...\n⚠️ 3. THE 90% TRAP: Most students confuse variable X with Y when the constraint changes...\n📝 4. ACTIVE RECALL TEST: 3 high-yield diagnostic questions with step-by-step solutions.`,
+          hi: `🧠 1. आसान उदाहरण (Feynman Hook): इस कठिन सिद्धांत को अपने घर के यूपीएस और इन्वर्टर के उदाहरण से समझिए...\n📊 2. 80/20 मुख्य नियम: पूरे चैप्टर में सिर्फ ये 3 पॉइंट्स 85% सवालों की जड़ हैं...\n⚠️ 3. जहाँ 90% लोग गलती करते हैं: परीक्षा या प्रैक्टिकल में इस दूसरे स्टेप पर सबसे ज्यादा कन्फ्यूजन होता है...`
+        }
+      },
+      {
+        id: 'mp5',
+        category: 'Study & Research',
+        badge: '🔬 McKinsey Grade',
+        model: 'Best for: Perplexity / Gemini / Claude',
+        title: {
+          en: 'First-Principles Deep Research & Decision Matrix',
+          hi: 'फर्स्ट-प्रिंसिपल्स डीप रिसर्च और डिसीजन मैट्रिक्स'
+        },
+        desc: {
+          en: 'Eliminate internet fluff and generate an empirical strategy report with second-order effects, trade-off decision tables, failure modes, and confidence scores.',
+          hi: 'इंटरनेट की सतही बातों को हटाकर किसी भी विषय या फैसले पर पक्के आंकड़ों, तुलनात्मक टेबल (Decision Matrix) और भविष्य के अनुमान के साथ गहरी रिसर्च निकालें।'
+        },
+        content: `[SYSTEM ROLE: ELITE STRATEGY RESEARCHER & FIRST-PRINCIPLES ENGINE]
+Operate in strictly rigorous, empirical, and unbiased analytical mode. Perform a multi-disciplinary, first-principles deep research investigation on [RESEARCH_TOPIC_OR_QUESTION].
+
+[RESEARCH PARAMETERS]
+- Core Topic / Problem Statement: [RESEARCH_TOPIC_OR_QUESTION]
+- Primary Decision / Objective: [PRIMARY_DECISION_GOAL]
+- Budget / Time / Resource Constraints: [KEY_CONSTRAINTS]
+- Output Language: [OUTPUT_LANGUAGE_ENGLISH_OR_HINDI]
+
+[STRICT ANTI-FLUFF PROTOCOL]
+- Actively discard average internet consensus, PR spin, and generic filler.
+- Base all conclusions strictly on empirical data, unit economics, and first principles.
+- Quantify probabilities and explicitly state Confidence Levels (%) for every prediction.
+
+[MANDATORY 5-PART RESEARCH REPORT]
+1. EXECUTIVE THESIS (Zero Fluff): State the core empirical truth and direct answer in the first 3 bullet points.
+2. FIRST-PRINCIPLES DECONSTRUCTION: Strip away assumptions. What are the immutable technical, economic, or human laws governing [RESEARCH_TOPIC_OR_QUESTION]?
+3. MULTI-VARIABLE DECISION MATRIX (Markdown Table): Compare all viable options across Cost, Execution Speed, Upside ROI, Failure Probability (%), and Hidden Bottlenecks.
+4. SECOND-ORDER EFFECTS & BLINDSPOTS: What happens in 6–18 months that 95% of analysts overlook? Flag any dynamic system constraints or live data blindspots.
+5. RANKED ACTION PLAN: Exact 1-2-3 execution sequence optimized for [KEY_CONSTRAINTS] with quantified confidence scores.`,
+        sampleOutput: {
+          en: `📑 1. EXECUTIVE THESIS: Empirical data disproves the popular approach; Option B delivers 2.8x higher retention at 40% lower CAC...\n\n📊 2. DECISION MATRIX:\n| Path | Setup Cost | 12M ROI | Failure Risk | Bottleneck |\n\n🔮 3. SECOND-ORDER BLINDSPOT (Confidence: 86%): Within 9 months, API rate-limits will force a shift toward hybrid caching...`,
+          hi: `📑 1. मुख्य निष्कर्ष: आम इंटरनेट राय के विपरीत, डेटा दिखाता है कि दूसरा विकल्प 40% कम खर्च में दोगुना रिजल्ट देता है...\n\n📊 2. डिसीजन मैट्रिक्स टेबल:\n| विकल्प | शुरुआती खर्च | 1 साल का रिटर्न | फेल होने का रिस्क | मुख्य अड़चन |\n\n🔮 3. भविष्य का छुपा पहलू (Confidence: 86%): अगले 9 महीनों में इस सेक्टर में यह बड़ा बदलाव आएगा...`
+        }
+      },
+      {
+        id: 'mp6',
+        category: 'Coding & Projects',
+        badge: '🚀 Principal Architect',
+        model: 'Best for: Claude / Gemini',
+        title: {
+          en: 'Zero-to-Live SaaS & Web App Full-Stack Builder',
+          hi: 'जीरो-टू-लाइव वेब ऐप और SaaS बिल्डर (No-Code)'
+        },
+        desc: {
+          en: 'Turn any app idea into a 100% complete, copy-paste ready single-file web application with startup Bento UI, interactive workflows, and Supabase cloud sync.',
+          hi: 'बिना कोडिंग जाने किसी भी बिजनेस आइडिया पर प्रीमियम स्टार्टअप डिजाइन, इंटरैक्टिव फीचर्स और क्लाउड डेटाबेस के साथ 100% चालू वेबसाइट कोड बनवाएं।'
+        },
+        content: `[SYSTEM ROLE: PRINCIPAL FULL-STACK ARCHITECT & PRODUCT DESIGNER]
+Act as a Staff Frontend & Cloud Engineer at a top Silicon Valley startup. Build a 100% complete, production-ready, single-file Web Application (index.html) for [APP_OR_SAAS_NAME_AND_IDEA].
+
+[PRODUCT SPECIFICATIONS]
+- Application Name & Core Concept: [APP_OR_SAAS_NAME_AND_IDEA]
+- Primary User Workflow & Must-Have Features: [CORE_FEATURES_AND_WORKFLOW]
+- UI/UX Aesthetic & Device Target: [UI_THEME_AND_DEVICE_TARGET]
+- Data Persistence Strategy: [STORAGE_LOCAL_OR_SUPABASE]
+
+[NON-NEGOTIABLE ENGINEERING RULES]
+- Output 100% complete, runnable HTML + Tailwind CSS + Lucide Icons + Vanilla JavaScript in a SINGLE block.
+- ZERO placeholders: Never write "// add logic here" or "// rest of code". Every button, modal, search filter, and form MUST work out of the box.
+- Enforce high-contrast dark mode (#060913 base) with responsive mobile/tablet touch targets and pre-loaded realistic sample data.
+
+[DELIVERABLE STRUCTURE]
+1. Complete Copy-Paste Ready index.html Code Block.
+2. Supabase SQL Schema Block (if cloud database is needed).
+3. 3-Step Vercel / GitHub Deployment Verification Checklist.`,
+        sampleOutput: {
+          en: `💻 1. COMPLETE PRODUCTION CODE: A full 500+ line <!DOCTYPE html> file with Bento Grid UI, working modals, instant search, local/cloud state sync, and pre-populated sample data—ready to paste into GitHub/Vercel with zero edits.`,
+          hi: `💻 1. 100% चालू वेबसाइट कोड: पूरा <!DOCTYPE html> कोड जिसमें हर बटन, सर्च बार, पॉप-अप विंडो और डेटा सेव करने का सिस्टम पहले सेकंड से काम करेगा—सीधे अपनी साइट पर लाइव करने के लिए तैयार।`
+        }
+      },
+      {
+        id: 'mp7',
+        category: 'Business & Content',
+        badge: '⚡ Viral Retention',
+        model: 'Best for: Claude / ChatGPT / Gemini',
+        title: {
+          en: 'High-Retention YouTube & Reels Script Architect',
+          hi: 'वायरल यूट्यूब और रील्स स्क्रिप्ट आर्किटेक्ट'
+        },
+        desc: {
+          en: 'Engineer scroll-stopping scripts using 3-second psychological curiosity hooks, 15-second pattern interrupts, visual B-roll cues, and high-converting CTAs.',
+          hi: 'पहले 3 सेकंड में दर्शक को रोकने वाले हुक (Hooks), हर 15 सेकंड में सस्पेंस मोड़ और कैमरा विजुअल गाइड के साथ वायरल वीडियो स्क्रिप्ट लिखवाएं।'
+        },
+        content: `[SYSTEM ROLE: VIRAL RETENTION ENGINEER & SCRIPT DIRECTOR]
+Act as a top 0.1% YouTube & Short-Form Retention Strategist. Engineer a high-retention, algorithm-optimized video script on [VIDEO_TOPIC_OR_IDEA].
+
+[PRODUCTION PARAMETERS]
+- Video Topic / Core Angle: [VIDEO_TOPIC_OR_IDEA]
+- Format & Duration: [FORMAT_REELS_60S_OR_YOUTUBE_LONG]
+- Target Audience & Pain Point: [TARGET_AUDIENCE_AND_PAIN_POINT]
+- Script Language & Tone: [SCRIPT_LANGUAGE_HINGLISH_OR_ENGLISH]
+
+[STRICT RETENTION RULES]
+- Ban slow introductions ("Hey guys, welcome back to my channel").
+- Open with an immediate visual and verbal curiosity gap in the first 3 seconds.
+- Insert a Pattern Interrupt (visual shift, contrarian fact, or micro-story) every 15–20 seconds to keep Average View Duration (AVD) above 80%.
+
+[MANDATORY 4-PART SCRIPT PACKAGE]
+1. 3 SCROLL-STOPPING HOOK VARIATIONS: (a) Fear/Mistake Hook, (b) Contrarian Data Hook, (c) Visual Proof Hook—plus thumbnail/cover text (max 4 words).
+2. TIME-STAMPED TWO-COLUMN SCRIPT TABLE: Column 1 = Exact Spoken Dialogue in natural [SCRIPT_LANGUAGE_HINGLISH_OR_ENGLISH]; Column 2 = Exact Visual B-Roll, On-Screen Text, and Sound Effects (SFX).
+3. DOPAMINE PAYOFF & VALUE CLIMAX: Deliver the core insight in the final 25% of the video so viewers watch till the very end.
+4. SEAMLESS LOOP / HIGH-CONVERSION CTA: A natural closing line that loops back to the first sentence or drives comments/leads.`,
+        sampleOutput: {
+          en: `🎯 1. HOOK MATRIX (0:00–0:03):\n- Hook A: "93% of people using AI are making this 10-second mistake..."\n- Thumbnail Text: "STOP DOING THIS!"\n\n🎬 2. TIME-STAMPED SCRIPT TABLE:\n| Time | Visual / B-Roll / SFX | Spoken Audio (Hinglish/EN) |\n| 0:00-0:04 | Split screen glitch + Whoosh SFX | "..." |`,
+          hi: `🎯 1. शुरुआती 3 सेकंड के 3 धमाकेदार Hooks:\n- Hook A: "अगर आप भी AI से ऐसे सवाल पूछते हैं, तो आप अपना 90% समय बर्बाद कर रहे हैं..."\n\n🎬 2. सेकंड-बाय-सेकंड स्क्रिप्ट टेबल:\n| समय | स्क्रीन पर क्या दिखेगा (Visual) | आपको क्या बोलना है (Audio) |`
+        }
+      },
+      {
+        id: 'mp8',
+        category: 'Business & Content',
+        badge: '💼 Founder Blueprint',
+        model: 'Best for: Gemini / ChatGPT / Claude',
+        title: {
+          en: 'Zero-to-One Startup & Monetization Blueprint',
+          hi: 'जीरो-टू-वन स्टार्टअप और कमाई (Monetization) ब्लूप्रिंट'
+        },
+        desc: {
+          en: 'Complete YC-style execution plan covering unit economics, free-to-paid pricing funnel, ₹0 organic customer acquisition loops, and a 30-day launch roadmap.',
+          hi: 'किसी भी ऑनलाइन बिजनेस या स्टार्टअप आइडिया के लिए कमाई का मॉडल, बिना विज्ञापन पहले 1,000 कस्टमर्स लाने का तरीका और 30-दिन का एक्शन प्लान बनाएं।'
+        },
+        content: `[SYSTEM ROLE: Y-COMBINATOR MANAGING PARTNER & GROWTH ARCHITECT]
+Act as a battle-tested Startup Founder and Growth Strategist. Build a ruthless, execution-focused business and monetization blueprint for [BUSINESS_OR_PRODUCT_IDEA].
+
+[FOUNDER PARAMETERS]
+- Business / Digital Product Concept: [BUSINESS_OR_PRODUCT_IDEA]
+- Target Customer & Core Pain Point: [TARGET_CUSTOMER_SEGMENT]
+- Starting Budget & Tech Stack: [STARTING_BUDGET_INR]
+- Output Language: [OUTPUT_LANGUAGE_ENGLISH_OR_HINDI]
+
+[STRICT ANTI-THEORY RULES]
+- Zero generic B-school jargon. Focus 100% on validation speed, distribution loops, and cash-flow generation.
+
+[MANDATORY 5-STAGE EXECUTION BLUEPRINT]
+1. VALUE PROPOSITION & PAIN SEVERITY AUDIT: Distinguish whether this is a "Vitamin" or a "Painkiller" and define the exact 1-sentence positioning hook.
+2. 3-TIER MONETIZATION & PRICING FUNNEL (Markdown Table): Design the Free Lead Magnet (Traffic Engine), Core Paid Offer (₹/$/mo), and High-Ticket/Pro Bundle with unit economics.
+3. ZERO-BUDGET DISTRIBUTION ENGINE (First 1,000 Users): 3 repeatable organic acquisition channels with exact outreach/content templates that require ₹0 paid ads.
+4. MOAT & RETENTION MECHANICS: How to create lock-in so users return weekly and cannot easily copy or leave the platform.
+5. 30-DAY SPRINT ROADMAP: Week-by-Week milestones (Week 1: MVP, Week 2: Beta Seeding, Week 3: Conversion Loop, Week 4: Scale) with clear KPIs.`,
+        sampleOutput: {
+          en: `🚀 1. POSITIONING HOOK: Painkiller score 9/10 for daily AI users...\n\n💳 2. MONETIZATION FUNNEL TABLE:\n| Tier | Offer | Price | Conversion Target |\n| Tier 1 | 50 Free Prompts | ₹0 | Traffic Engine |\n| Tier 2 | Pro Studio + Industry Packs | ₹299/mo | 4.5% of Active Users |`,
+          hi: `🚀 1. बिजनेस पोजिशनिंग: कस्टमर की असली समस्या और समाधान...\n\n💳 2. कमाई का 3-लेवल मॉडल (Pricing Table):\n| लेवल | क्या मिलेगा | कीमत | लक्ष्य |\n| Free Tier | बेसिक प्रॉम्प्ट्स | ₹0 | लाखों यूजर्स का ट्रैफिक लाना |\n| Pro Pack | इंडस्ट्री मेगा-बंडल्स | ₹299/महीना | सीधी कमाई |`
+        }
+      }
+    ];
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = uiText[lang];
+
+      document.getElementById('lang-en').className = lang === 'en'
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white';
+      document.getElementById('lang-hi').className = lang === 'hi'
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white';
+
+      document.getElementById('nav-subtitle').innerText = t.navSubtitle;
+      document.getElementById('txt-explore').innerText = t.explore;
+      document.getElementById('txt-saved').innerText = t.saved;
+      document.getElementById('hero-badge').innerText = t.heroBadge;
+      document.getElementById('hero-title-1').innerText = t.heroTitle1;
+      document.getElementById('hero-desc').innerText = t.heroDesc;
+      document.getElementById('search-box').placeholder = t.searchPlaceholder;
+      document.getElementById('m-step1-label').innerText = t.step1Label;
+      document.getElementById('m-prompt-label').innerHTML = `<i data-lucide="terminal" class="w-4 h-4"></i> ${t.promptLabel}`;
+      document.getElementById('m-output-label').innerHTML = `<i data-lucide="check-circle-2" class="w-4 h-4"></i> ${t.outputLabel}`;
+      document.getElementById('m-copy-btn-txt').innerText = t.copyBtn;
+      document.getElementById('m-open-label').innerText = t.openInLabel;
+
+      renderPromptGrid();
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30';
+        } else {
+          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400';
+        }
+      });
+      renderPromptGrid();
+    }
+
+    function setSavedFilter(onlySaved) {
+      showSavedOnly = onlySaved;
+      document.getElementById('btn-explore').className = !onlySaved
+        ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white flex items-center gap-1.5 shadow-md'
+        : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-slate-500 flex items-center gap-1.5';
+      document.getElementById('btn-saved').className = onlySaved
+        ? 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white flex items-center gap-1.5 shadow-md'
+        : 'px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-slate-500 flex items-center gap-1.5';
+      renderPromptGrid();
+    }
+
+    function toggleSave(id, e) {
+      if (e) e.stopPropagation();
+      if (savedIds.includes(id)) {
+        savedIds = savedIds.filter(x => x !== id);
+        triggerToast(currentLang === 'en' ? 'Removed from Saved' : 'Saved से हटा दिया गया');
+      } else {
+        savedIds.push(id);
+        triggerToast(currentLang === 'en' ? '⭐ Saved to your library!' : '⭐ Saved में जुड़ गया!');
+      }
+      localStorage.setItem('nexa_saved_v4', JSON.stringify(savedIds));
+      renderPromptGrid();
+    }
+
+    function resetSearch() {
+      document.getElementById('search-box').value = '';
+      renderPromptGrid();
+    }
+
+    function getVarsFromContent(text) {
+      const m = text.match(/\[([A-Z0-9_]+)\]/g) || [];
+      return [...new Set(m.map(x => x.slice(1, -1)))].filter(
+        v => !v.startsWith('SYSTEM_') && !v.startsWith('USER_') && !v.startsWith('STRICT_') && !v.startsWith('MANDATORY_') && !v.startsWith('SCENE_') && !v.startsWith('LEARNING_') && !v.startsWith('RESEARCH_') && !v.startsWith('PRODUCT_') && !v.startsWith('NON_') && !v.startsWith('DELIVERABLE_') && !v.startsWith('PRODUCTION_') && !v.startsWith('FOUNDER_')
+      );
+    }
+
+    function renderPromptGrid() {
+      const grid = document.getElementById('prompt-grid');
+      const q = document.getElementById('search-box').value.trim().toLowerCase();
+      document.getElementById('clear-search-btn').classList.toggle('hidden', !q);
+      document.getElementById('saved-counter').innerText = savedIds.length;
+      const t = uiText[currentLang];
+
+      const list = masterPrompts.filter(item => {
+        const matchSaved = showSavedOnly ? savedIds.includes(item.id) : true;
+        const matchCat = currentCategory === 'All' || item.category === currentCategory;
+        const titleStr = (item.title[currentLang] || item.title.en).toLowerCase();
+        const descStr = (item.desc[currentLang] || item.desc.en).toLowerCase();
+        const matchQ = !q || titleStr.includes(q) || descStr.includes(q) || item.category.toLowerCase().includes(q) || item.content.toLowerCase().includes(q);
+        return matchSaved && matchCat && matchQ;
+      });
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full pro-card rounded-3xl p-10 text-center">
+            <h3 class="text-lg font-extrabold text-white mb-2">No matching Mega-Prompts found</h3>
+            <p class="text-sm text-slate-300 mb-5">Try clearing your search filter or switching back to All Mega-Prompts.</p>
+            <button onclick="setCategory('All'); setSavedFilter(false); resetSearch();" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-bold">
+              Show All Mega-Prompts
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(item => {
+        const isSaved = savedIds.includes(item.id);
+        const vars = getVarsFromContent(item.content);
+        const titleText = item.title[currentLang] || item.title.en;
+        const descText = item.desc[currentLang] || item.desc.en;
+        const outText = item.sampleOutput[currentLang] || item.sampleOutput.en;
+
+        return `
+          <div onclick="openStudioModal('${item.id}')" class="pro-card rounded-3xl p-6 flex flex-col justify-between cursor-pointer group">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  ${item.category}
+                </span>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                    ${item.badge}
+                  </span>
+                  <button onclick="toggleSave('${item.id}', event)" class="p-2 rounded-xl bg-slate-950 border border-slate-700 ${isSaved ? 'text-amber-400' : 'text-slate-400 hover:text-white'}">
+                    <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-amber-400' : ''}"></i>
+                  </button>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-extrabold text-white group-hover:text-indigo-300 transition-colors mb-2.5 leading-snug">
+                ${titleText}
+              </h3>
+              <p class="text-sm text-slate-200 leading-relaxed mb-5 font-medium">
+                ${descText}
+              </p>
+
+              <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 mb-5">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> ${t.outputPreviewLabel}
+                  </span>
+                  <span class="text-[11px] font-semibold text-slate-300">${item.model}</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-200 line-clamp-3 leading-relaxed">
+                  ${outText}
+                </p>
+              </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-800 flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2 text-xs font-bold text-slate-200">
+                <i data-lucide="layers" class="w-4 h-4 text-indigo-400"></i>
+                <span>5 Layers • ${vars.length} ${t.inputsCountSuffix}</span>
+              </div>
+              <span class="px-4 py-2.5 rounded-xl bg-indigo-600 group-hover:bg-indigo-500 text-white text-xs sm:text-sm font-extrabold transition-all flex items-center gap-1.5 shadow-md">
+                ${t.openStudioBtn} <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function openStudioModal(id) {
+      activeItem = masterPrompts.find(x => x.id === id);
+      if (!activeItem) return;
+      userVars = {};
+
+      document.getElementById('m-category').innerText = activeItem.category;
+      document.getElementById('m-tool').innerText = activeItem.model;
+      document.getElementById('m-title').innerText = activeItem.title[currentLang] || activeItem.title.en;
+      document.getElementById('m-desc').innerText = activeItem.desc[currentLang] || activeItem.desc.en;
+      document.getElementById('m-output-preview').innerText = activeItem.sampleOutput[currentLang] || activeItem.sampleOutput.en;
+
+      const vars = getVarsFromContent(activeItem.content);
+      const varsGrid = document.getElementById('m-vars-grid');
+      const varsSec = document.getElementById('m-vars-section');
+
+      if (vars.length === 0) {
+        varsSec.classList.add('hidden');
+      } else {
+        varsSec.classList.remove('hidden');
+        varsGrid.innerHTML = vars.map(v => `
+          <div>
+            <label class="text-xs font-extrabold text-slate-200 block mb-1.5">${v.replace(/_/g, ' ')}</label>
+            <input
+              type="text"
+              oninput="onVarInput('${v}', this.value)"
+              placeholder="Enter ${v.toLowerCase().replace(/_/g, ' ')}..."
+              class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-600 rounded-xl text-sm text-white placeholder-slate-400 focus:border-indigo-500 focus:outline-none"
+            />
+          </div>
+        `).join('');
+      }
+
+      updateLivePromptBox();
+      document.getElementById('studio-modal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function onVarInput(k, val) {
+      userVars[k] = val;
+      updateLivePromptBox();
+    }
+
+    function getCompiledPromptString() {
+      if (!activeItem) return '';
+      let out = activeItem.content;
+      Object.keys(userVars).forEach(k => {
+        if (userVars[k] && userVars[k].trim() !== '') {
+          out = out.replaceAll(`[${k}]`, userVars[k]);
+        }
+      });
+      return out;
+    }
+
+    function updateLivePromptBox() {
+      if (!activeItem) return;
+      const validVars = new Set(getVarsFromContent(activeItem.content));
+      const html = activeItem.content.replace(/\[([A-Z0-9_]+)\]/g, (m, vName) => {
+        if (!validVars.has(vName)) return `<strong class="text-indigo-400">${m}</strong>`;
+        const val = userVars[vName];
+        return `<span class="var-highlight">${val && val.trim() ? val : m}</span>`;
+      });
+      document.getElementById('m-live-prompt').innerHTML = html;
+    }
+
+    function closeStudioModal() {
+      document.getElementById('studio-modal').classList.add('hidden');
+    }
+
+    function copyTextToClipboard(str, msg) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(str);
+      } else {
+        const area = document.createElement('textarea');
+        area.value = str;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand('copy');
+        document.body.removeChild(area);
+      }
+      triggerToast(msg);
+    }
+
+    function copyCompiledPrompt() {
+      const msg = currentLang === 'en' ? '✨ 5-Layer Mega-Prompt copied to clipboard!' : '✨ 5-लेयर मेगा-प्रॉम्प्ट कॉपी हो गया!';
+      copyTextToClipboard(getCompiledPromptString(), msg);
+    }
+
+    function copyAndLaunch(url) {
+      copyCompiledPrompt();
+      setTimeout(() => window.open(url, '_blank'), 400);
+    }
+
+    function triggerToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toast-msg').innerText = msg;
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 2400);
+    }
+
+    // ALWAYS OPENS WITH SAVED TOKEN + 100% BLANK CODE BOX
+    function openFounderSync() {
+      document.getElementById('gh-pat-input').value = localStorage.getItem('gh_pat_token') || '';
+      document.getElementById('gh-code-input').value = '';
+      document.getElementById('founder-modal').classList.remove('hidden');
+    }
+
+    function closeFounderSync() {
+      document.getElementById('gh-code-input').value = '';
+      document.getElementById('founder-modal').classList.add('hidden');
+    }
+
+    function clearDeployCodeBox() {
+      document.getElementById('gh-code-input').value = '';
+      triggerToast('🗑️ Code box cleared!');
+    }
+
+    async function pasteCodeFromClipboard() {
+      try {
+        const clipText = await navigator.clipboard.readText();
+        if (clipText) {
+          document.getElementById('gh-code-input').value = clipText;
+          triggerToast('📋 Code pasted into box!');
+        }
+      } catch (err) {
+        alert('Tap inside the empty box and press Paste.');
+      }
+    }
+
+    async function deployFromFooter() {
+      const token = document.getElementById('gh-pat-input').value.trim();
+      const code = document.getElementById('gh-code-input').value.trim();
+      const btn = document.getElementById('gh-push-btn');
+
+      if (!token || !code) {
+        alert('Please enter both GitHub Token and HTML Code.');
+        return;
+      }
+
+      // SAFETY LOCK: BLOCK INCOMPLETE / HALF COPIED CODE
+      if (!code.includes('<!DOCTYPE html>') || !code.includes('</html>')) {
+        alert('⚠️ रुकिए! पूरा कोड कॉपी नहीं हुआ है (नीचे का </html> गायब है)। कृपया पूरा कोड कॉपी करके दोबारा पेस्ट करें ताकि साइट खराब न हो!');
+        return;
+      }
+
+      localStorage.setItem('gh_pat_token', token);
+      btn.innerText = '⏳ Deploying Mega-Prompts Live...';
+      btn.disabled = true;
+
+      try {
+        const apiUrl = 'https://api.github.com/repos/surya333555/AI-Vault/contents/index.html';
+        const getRes = await fetch(apiUrl, {
+          headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+        });
+        const fileData = await getRes.json();
+        const encoded = btoa(unescape(encodeURIComponent(code)));
+
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: 'Upgrade to 5-Layer Mega-Prompts + Auto-Blank Deploy Box',
+            content: encoded,
+            sha: fileData.sha
+          })
+        });
+
+        if (putRes.ok) {
+          document.getElementById('gh-code-input').value = '';
+          closeFounderSync();
+          triggerToast('🚀 Mega-Prompts Live! Refresh in 15 seconds.');
+        } else {
+          alert('GitHub Token check failed.');
+        }
+      } catch (e) {
+        alert('Error: ' + e.message);
+      } finally {
+        btn.innerText = '🚀 Push Live Update Now';
+        btn.disabled = false;
+      }
+    }
+
+    setLanguage('en');
+  </script>
+</body>
+</html>
