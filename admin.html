@@ -37,7 +37,7 @@
         <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-extrabold text-white">⚡</div>
         <div>
           <h1 class="text-lg font-extrabold text-white">NexaPrompt AI — Admin Control Center</h1>
-          <p class="text-xs text-emerald-400 font-semibold">Direct GitHub Cloud Engine Active</p>
+          <p class="text-xs text-emerald-400 font-semibold">Direct GitHub Cloud Engine Active (Zero Supabase Errors)</p>
         </div>
       </div>
       <div class="flex items-center gap-2.5">
@@ -54,17 +54,17 @@
   <!-- MAIN ADMIN WORKSPACE -->
   <main class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1">
     
-    <!-- LEFT COLUMN: CREATE / PUBLISH MEGA-PROMPT -->
+    <!-- LEFT COLUMN: CREATE / GENERATE 5-LAYER MEGA-PROMPT -->
     <div class="lg:col-span-7 space-y-6">
       <div class="card-box rounded-3xl p-6 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
           <h2 class="text-lg font-extrabold text-white">➕ Publish New 5-Layer Mega-Prompt</h2>
           <div class="flex flex-wrap gap-2">
             <button onclick="fillMetaAdsSeoPreset()" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-extrabold hover:bg-emerald-600 hover:text-white">
-              🎯 1-Click Fill: Meta Ads & SEO
+              🎯 1-Click Fill: Meta Ads & SEO Prompt
             </button>
             <button onclick="autoBuild5LayerTemplate()" class="px-3 py-1.5 rounded-xl bg-indigo-600/20 text-indigo-300 border border-indigo-500/40 text-xs font-extrabold hover:bg-indigo-600 hover:text-white">
-              ✨ Auto-Generate Template
+              ✨ Auto-Generate 5-Layer Template
             </button>
           </div>
         </div>
@@ -72,11 +72,11 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="text-xs font-bold text-slate-300 block mb-1">Prompt Title (English)*</label>
-            <input id="p-title-en" type="text" placeholder="e.g., Meta Ads Mastery" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
+            <input id="p-title-en" type="text" placeholder="e.g., Meta Ads & SEO Growth Mastery" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
           </div>
           <div>
             <label class="text-xs font-bold text-slate-300 block mb-1">Prompt Title (Hindi)</label>
-            <input id="p-title-hi" type="text" placeholder="जैसे: मेटा ऐड्स मास्टरी" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
+            <input id="p-title-hi" type="text" placeholder="जैसे: मेटा ऐड्स और एसईओ मास्टरी इंजन" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
           </div>
         </div>
 
@@ -113,8 +113,8 @@
         </div>
 
         <div>
-          <label class="text-xs font-bold text-indigo-300 block mb-1">Full 5-Layer Mega-Prompt Content*</label>
-          <textarea id="p-content" rows="8" placeholder="Click '1-Click Fill' or 'Auto-Generate' above..." class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono-code"></textarea>
+          <label class="text-xs font-bold text-indigo-300 block mb-1">Full 5-Layer Mega-Prompt Content* (Use [VARIABLE_NAME] for user inputs)</label>
+          <textarea id="p-content" rows="8" placeholder="Click '1-Click Fill: Meta Ads & SEO' or 'Auto-Generate Template' above..." class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-mono-code"></textarea>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -129,7 +129,7 @@
         </div>
 
         <button onclick="publishPromptDirectlyToSite()" id="pub-btn" class="w-full py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm shadow-lg">
-          🚀 Publish Mega-Prompt Directly to Live Website & Clear Form
+          🚀 Publish Mega-Prompt Directly to Live Website
         </button>
       </div>
     </div>
@@ -144,8 +144,8 @@
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
           <select id="target-file" class="px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white font-bold">
-            <option value="admin.html">Target: admin.html (Admin Page)</option>
             <option value="index.html">Target: index.html (Main Site)</option>
+            <option value="admin.html">Target: admin.html (Admin Page)</option>
           </select>
           <input id="adm-gh-token" type="password" placeholder="GitHub Token (ghp_...)" class="px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white" />
         </div>
@@ -169,7 +169,7 @@
           <button onclick="loadCustomPromptsFromSite()" class="text-xs font-bold text-indigo-400 hover:text-white">🔄 Refresh List</button>
         </div>
         <p class="text-xs text-slate-400">
-          Published prompts are injected live into your main site (`index.html`).
+          Every prompt you publish on the left is injected directly into your live website (`index.html`). No external database needed!
         </p>
         <div id="admin-prompt-list" class="space-y-3 max-h-96 overflow-y-auto pr-1"></div>
       </div>
@@ -199,8 +199,9 @@
       document.getElementById('pin-screen').classList.add('hidden');
     }
 
-    document.getElementById('adm-gh-token').value = localStorage.getItem('gh_pat_token'] || '';
+    document.getElementById('adm-gh-token').value = localStorage.getItem('gh_pat_token') || '';
 
+    // 1-CLICK FILL: META ADS & SEO ZERO-TO-ADVANCED MEGA-PROMPT
     function fillMetaAdsSeoPreset() {
       document.getElementById('p-title-en').value = 'Meta Ads & SEO: Zero-to-Top 1% Growth Mastery Engine';
       document.getElementById('p-title-hi').value = 'Meta Ads और SEO: जीरो से एडवांस मास्टरी इंजन';
@@ -208,43 +209,53 @@
       document.getElementById('p-model').value = 'Best for: Gemini / ChatGPT / Claude';
       document.getElementById('p-badge').value = '📈 Growth Master';
       document.getElementById('p-desc-en').value = 'Master Meta Ads (Facebook/Instagram) and Google SEO from absolute zero to advanced campaign scaling, ROAS optimization, and #1 search ranking.';
-      document.getElementById('p-desc-hi').value = 'बिना किसी पुरानी नॉलेज के Meta Ads और SEO को बिल्कुल बेसिक से एडवांस लेवल तक स्टेप-बाय-स्टेप सीखें और लागू करें।';
+      document.getElementById('p-desc-hi').value = 'बिना किसी पुरानी नॉलेज के Meta Ads और SEO को बिल्कुल बेसिक से एडवांस लेवल (कैंपेन सेटअप, ROAS और रैंकिंग) तक स्टेप-बाय-स्टेप सीखें और लागू करें।';
       document.getElementById('p-content').value = `[SYSTEM ROLE & GROWTH MARKETING ARCHITECTURE]
-Act as a Chief Performance Marketing Officer (CMO) & Technical SEO Director. Take me from absolute beginner to Top 1% Advanced execution in [FOCUS_AREA_META_ADS_OR_SEO].
+Act as a Chief Performance Marketing Officer (CMO) & Technical SEO Director who has scaled startups from zero to $50M+. Take me from absolute beginner (Zero Knowledge) to Top 1% Advanced execution in [FOCUS_AREA_META_ADS_OR_SEO].
 
 [USER CONTEXT & PARAMETERS]
-- Primary Skill to Master: [FOCUS_AREA_META_ADS_OR_SEO]
-- Business Niche: [NICHE_OR_BUSINESS_TYPE]
-- Monthly Budget / Goal: [BUDGET_OR_TARGET_GOAL]
-- Preferred Language: [OUTPUT_LANGUAGE]
+- Primary Skill / Channel to Master: [FOCUS_AREA_META_ADS_OR_SEO]
+- Business Niche or Project Type: [NICHE_OR_BUSINESS_TYPE]
+- Monthly Practice Budget / Target Goal: [BUDGET_OR_TARGET_GOAL]
+- Preferred Language (Simple Hinglish/English/Hindi): [OUTPUT_LANGUAGE]
+
+[STRICT ANTI-FLUFF PROTOCOL]
+- Do NOT give generic textbook definitions. Explain how the 2026 algorithm actually works in real life.
+- Use simple everyday examples, exact campaign/keyword tables, and step-by-step screen actions.
 
 [MANDATORY 5-STAGE MASTERY & EXECUTION BLUEPRINT]
-1. ALGORITHM INTUITION (Zero-Level Foundation)
-2. 80/20 ACCOUNT & CAMPAIGN ARCHITECTURE (Markdown Table)
-3. ZERO-TO-LIVE STEP-BY-STEP LAUNCH GUIDE
-4. METRICS FORENSICS & SCALING RULES (ROAS / Rankings)
-5. TOP 3 MONEY-BURNING MISTAKES & 30-DAY ROADMAP`;
-      document.getElementById('p-out-en').value = `🎯 Algorithm Breakdown + Campaign/Keyword Matrix Table + 30-Day Practical Roadmap.`;
-      document.getElementById('p-out-hi').value = `🎯 एल्गोरिदम का गणित + कैंपेन और कीवर्ड टेबल + 30-दिन का रोडमैप।`;
+1. ALGORITHM INTUITION (Zero-Level Foundation): Explain how Meta's Andromeda AI Auction or Google's Search Intent Engine actually decides who wins, using a simple real-world analogy.
+2. THE 80/20 ACCOUNT & CAMPAIGN ARCHITECTURE (Markdown Table):
+   - For Meta Ads: Campaign structure (CBO vs ABO), Broad vs Interest targeting, 3:2:2 Creative Testing Matrix, and Hook/Hold rate benchmarks.
+   - For SEO: High-Intent Keyword Matrix, On-Page Topical Authority, Technical Core Web Vitals, and Backlink acquisition.
+3. ZERO-TO-LIVE STEP-BY-STEP LAUNCH GUIDE: Exact click-by-click setup from Day 1 for [NICHE_OR_BUSINESS_TYPE] within [BUDGET_OR_TARGET_GOAL].
+4. METRICS FORENSICS & SCALING RULES: How to read CPM, CTR, CPA, ROAS (or Impressions, KD, DR) and exact IF/THEN rules on when to kill or scale a campaign/page.
+5. TOP 3 MONEY-BURNING MISTAKES & 30-DAY MASTERY ROADMAP: What 95% of beginners do wrong and a week-by-week practical action plan.`;
+      document.getElementById('p-out-en').value = `🎯 1. Algorithm Breakdown: How creative hooks drive 80% of Meta targeting in 2026...\n📊 2. Campaign & Keyword Matrix Table: Exact budget split, CTR > 1.8% & ROAS scaling rules...\n🚀 3. 30-Day Practical Roadmap from Beginner to Pro.`;
+      document.getElementById('p-out-hi').value = `🎯 1. एल्गोरिदम का असली खेल: आसान भाषा में Meta Ads और Google रैंकिंग का पूरा गणित...\n📊 2. कैंपेन और कीवर्ड टेबल: कम बजट में टेस्टिंग, CTR और ROAS बढ़ाने का स्टेप-बाय-स्टेप फॉर्मूला...\n🚀 3. 30-दिन का प्रैक्टिकल रोडमैप।`;
     }
 
     function autoBuild5LayerTemplate() {
       const title = document.getElementById('p-title-en').value.trim() || '[YOUR_TOPIC]';
       document.getElementById('p-content').value = `[SYSTEM ROLE & ELITE FRAMEWORK]
-Act as a World-Class Principal Expert specializing in ${title}.
+Act as a World-Class Principal Expert & Strategist specializing in ${title}.
 
 [USER CONTEXT & PARAMETERS]
-- Primary Topic: [MAIN_TOPIC]
-- Constraints: [CONSTRAINTS]
-- Level: [USER_LEVEL]
-- Language: [LANGUAGE]
+- Primary Topic / Target: [MAIN_TOPIC_OR_GOAL]
+- Specific Context / Constraints: [BUDGET_OR_CONSTRAINTS]
+- Current Level / Background: [USER_EXPERIENCE_LEVEL]
+- Output Language: [OUTPUT_LANGUAGE_ENGLISH_OR_HINDI]
 
-[MANDATORY 5-STAGE EXECUTION]
-1. EXECUTIVE CORE THESIS
-2. FIRST-PRINCIPLES BREAKDOWN
-3. COMPARATIVE DECISION MATRIX (Markdown Table)
-4. TOP 3 HIDDEN RISKS
-5. STEP-BY-STEP ACTION PLAN`;
+[STRICT ANTI-FLUFF CONSTRAINTS]
+- Zero generic introductions, zero textbook filler.
+- Back every recommendation with empirical data, structured Markdown tables, and clear probabilities.
+
+[MANDATORY 5-STAGE EXECUTION ARCHITECTURE]
+1. EXECUTIVE CORE THESIS (Top 3 high-leverage insights)
+2. FIRST-PRINCIPLES BREAKDOWN & MECHANICS
+3. COMPARATIVE DECISION MATRIX (Markdown Table with Pros, Cons, Cost, ROI)
+4. TOP 3 HIDDEN RISKS / MISTAKES TO AVOID
+5. STEP-BY-STEP ACTION PLAN WITH CONFIDENCE SCORE (%)`;
     }
 
     function getActiveToken() {
@@ -256,11 +267,11 @@ Act as a World-Class Principal Expert specializing in ${title}.
       return localStorage.getItem('gh_pat_token') || '';
     }
 
-    // PUBLISH DIRECTLY AND CLEAR FORM INPUTS AUTOMATICALLY
+    // PUBLISH DIRECTLY INTO LIVE INDEX.HTML ON GITHUB (ZERO SUPABASE DEPENDENCY!)
     async function publishPromptDirectlyToSite() {
       const token = getActiveToken();
       if (!token) {
-        alert('Please paste your GitHub Token in the Right-Side box first!');
+        alert('Please paste your GitHub Token (ghp_...) in the Right-Side box first!');
         return;
       }
 
@@ -269,19 +280,19 @@ Act as a World-Class Principal Expert specializing in ${title}.
       const category = document.getElementById('p-cat').value;
       const model = document.getElementById('p-model').value.trim();
       const badge = document.getElementById('p-badge').value.trim() || '🔥 Pro Studio';
-      const descEn = document.getElementById('p-desc-en').value.trim() || 'Elite 5-Layer Mega-Prompt.';
+      const descEn = document.getElementById('p-desc-en').value.trim() || 'Elite 5-Layer Mega-Prompt for high-output results.';
       const descHi = document.getElementById('p-desc-hi').value.trim() || descEn;
       const promptText = document.getElementById('p-content').value.trim();
-      const outEn = document.getElementById('p-out-en').value.trim() || '📊 Structured Decision Matrix + Execution Plan.';
+      const outEn = document.getElementById('p-out-en').value.trim() || '📊 Structured Decision Matrix + Step-by-Step Execution Plan.';
       const outHi = document.getElementById('p-out-hi').value.trim() || outEn;
 
       if (!titleEn || !promptText) {
-        alert('Please fill Title and Content!');
+        alert('Please fill Title (English) and Mega-Prompt Content!');
         return;
       }
 
       const btn = document.getElementById('pub-btn');
-      btn.innerText = '⏳ Publishing Directly...';
+      btn.innerText = '⏳ Publishing Directly to Live Website...';
       btn.disabled = true;
 
       try {
@@ -289,7 +300,7 @@ Act as a World-Class Principal Expert specializing in ${title}.
         const getRes = await fetch(apiUrl, {
           headers: { Authorization: 'Bearer ' + token, Accept: 'application/vnd.github+json' }
         });
-        if (!getRes.ok) throw new Error('Could not read index.html.');
+        if (!getRes.ok) throw new Error('Could not read index.html. Check your GitHub Token.');
 
         const fileData = await getRes.json();
         const currentHtml = decodeURIComponent(escape(atob(fileData.content.replace(/\n/g, ''))));
@@ -307,6 +318,10 @@ Act as a World-Class Principal Expert specializing in ${title}.
         };
 
         const anchor = 'const builtInPrompts = [';
+        if (!currentHtml.includes(anchor)) {
+          throw new Error('Could not find builtInPrompts array in index.html');
+        }
+
         const injectionBlock = `${anchor}\n      /*CUSTOM_START_${newId}*/\n      ${JSON.stringify(newPromptObj)},\n      /*CUSTOM_END_${newId}*/`;
         const updatedHtml = currentHtml.replace(anchor, injectionBlock);
         const encoded = btoa(unescape(encodeURIComponent(updatedHtml)));
@@ -326,23 +341,18 @@ Act as a World-Class Principal Expert specializing in ${title}.
         });
 
         if (putRes.ok) {
-          alert('🎉 Mega-Prompt Published Successfully! Form cleared.');
-          // CLEAR ALL INPUT FIELDS AUTOMATICALLY AFTER PUBLISH
+          alert('🎉 Boom! Your Mega-Prompt "' + titleEn + '" is published directly to your live website! Refresh main site in 15 seconds.');
           document.getElementById('p-title-en').value = '';
           document.getElementById('p-title-hi').value = '';
-          document.getElementById('p-desc-en').value = '';
-          document.getElementById('p-desc-hi').value = '';
           document.getElementById('p-content').value = '';
-          document.getElementById('p-out-en').value = '';
-          document.getElementById('p-out-hi').value = '';
           loadCustomPromptsFromSite();
         } else {
-          alert('GitHub Update Error.');
+          alert('GitHub Update Error. Please check your token.');
         }
       } catch (err) {
         alert('Error: ' + err.message);
       } finally {
-        btn.innerText = '🚀 Publish Mega-Prompt Directly to Live Website & Clear Form';
+        btn.innerText = '🚀 Publish Mega-Prompt Directly to Live Website';
         btn.disabled = false;
       }
     }
@@ -350,7 +360,10 @@ Act as a World-Class Principal Expert specializing in ${title}.
     async function loadCustomPromptsFromSite() {
       const box = document.getElementById('admin-prompt-list');
       const token = getActiveToken();
-      if (!token) return;
+      if (!token) {
+        box.innerHTML = '<p class="text-xs text-amber-300">Enter your GitHub Token above to view and manage live prompts.</p>';
+        return;
+      }
 
       try {
         const apiUrl = 'https://api.github.com/repos/surya333555/AI-Vault/contents/index.html';
@@ -365,7 +378,7 @@ Act as a World-Class Principal Expert specializing in ${title}.
         const matches = [...currentHtml.matchAll(regex)];
 
         if (matches.length === 0) {
-          box.innerHTML = '<p class="text-xs text-slate-400">No custom prompts published yet.</p>';
+          box.innerHTML = '<p class="text-xs text-slate-400">8 Core Mega-Prompts are active. Use the left form (or click "1-Click Fill: Meta Ads & SEO") to publish new prompts!</p>';
           return;
         }
 
@@ -436,7 +449,7 @@ Act as a World-Class Principal Expert specializing in ${title}.
         return;
       }
       if (!code.includes('<!DOCTYPE html>') || !code.includes('</html>')) {
-        alert('⚠️ Incomplete HTML code detected!');
+        alert('⚠️ Incomplete HTML code detected! Please copy the full code.');
         return;
       }
 
