@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>NexaPrompt AI — Elite 5-Layer Mega Prompts & Verified Outputs</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
     :root { color-scheme: dark; }
@@ -52,7 +54,7 @@
 </head>
 <body class="min-h-screen flex flex-col premium-dark-bg">
 
-  <!-- TOP NAVIGATION BAR (100% PUBLIC — NO ADMIN OR DEPLOY BUTTONS) -->
+  <!-- TOP NAVIGATION BAR (100% CLEAN PUBLIC UI) -->
   <header class="sticky top-0 z-40 nav-surface">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
       
@@ -116,7 +118,7 @@
           type="text"
           id="search-box"
           oninput="renderPromptGrid()"
-          placeholder="Search Mega-Prompts (e.g., IPO Forensics, SIP Overlap, 4K Video, Exam Mastery, SaaS)..."
+          placeholder="Search Mega-Prompts (e.g., Meta Ads, SEO, IPO Forensics, SIP, 4K Video, SaaS)..."
           class="w-full py-2.5 bg-transparent text-base text-white placeholder-slate-400 focus:outline-none font-medium"
         />
         <button onclick="resetSearch()" id="clear-search-btn" class="hidden px-3 py-1.5 rounded-lg bg-slate-800 text-xs font-bold text-slate-200 hover:text-white">
@@ -127,7 +129,7 @@
 
     <div class="flex flex-wrap items-center justify-center gap-2.5">
       <button onclick="setCategory('All')" data-cat="All" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30">
-        ✨ All Mega-Prompts (<span id="total-count">8</span>)
+        ✨ All Mega-Prompts (<span id="total-count">9</span>)
       </button>
       <button onclick="setCategory('Finance & Markets')" data-cat="Finance & Markets" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-slate-200 border border-slate-700 hover:border-indigo-400">
         📊 Finance & Markets
@@ -254,10 +256,6 @@
   </div>
 
   <script>
-    const SUPABASE_URL = 'https://qongpcvfkwifxtfxqqbb.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvbmdwY3Zma3dpZnh0ZnhxcWJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwNzMxNzgsImV4cCI6MjEwNzY0OTE3OH0.B1_vx4QfyEUhAN2BHj2d7omQxTzjPmfW0okVwoaRegM';
-    const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
-
     let currentLang = 'en';
     let currentCategory = 'All';
     let showSavedOnly = false;
@@ -273,7 +271,7 @@
         heroBadge: 'Upgraded 5-Layer Mega-Prompts — Built for Top 1% Deep Outputs',
         heroTitle1: 'Turn Any AI Into an Elite Expert with',
         heroDesc: 'Short prompts give average answers. Our 5-Layer Mega-Prompts force AI models to use institutional frameworks, hard data tables, anti-fluff locks, and step-by-step execution plans.',
-        searchPlaceholder: 'Search Mega-Prompts (e.g., IPO Forensics, SIP Overlap, 4K Video, Exam Mastery, SaaS)...',
+        searchPlaceholder: 'Search Mega-Prompts (e.g., Meta Ads, SEO, IPO Forensics, SIP, 4K Video, SaaS)...',
         outputPreviewLabel: 'VERIFIED MASTER OUTPUT PREVIEW',
         inputsCountSuffix: 'Custom Parameters',
         openStudioBtn: 'Open Mega-Studio',
@@ -290,7 +288,7 @@
         heroBadge: 'अपग्रेडेड 5-Layer Mega-Prompts — Top 1% एक्सपर्ट आउटपुट के लिए',
         heroTitle1: 'किसी भी AI से पाएं 10x गहरा और सटीक रिजल्ट',
         heroDesc: 'छोटे प्रॉम्प्ट्स हमेशा साधारण जवाब देते हैं। हमारे 5-लेयर मेगा-प्रॉम्प्ट्स AI को इंस्टीट्यूशनल फ्रेमवर्क, डेटा टेबल्स, रिस्क मैट्रिक्स और स्टेप-बाय-स्टेप एक्शन प्लान देने के लिए मजबूर करते हैं।',
-        searchPlaceholder: 'मेगा-प्रॉम्प्ट सर्च करें (जैसे: IPO Forensics, SIP Overlap, 4K Video, Study, SaaS)...',
+        searchPlaceholder: 'मेगा-प्रॉम्प्ट सर्च करें (जैसे: Meta Ads, SEO, IPO, SIP, 4K Video, Study)...',
         outputPreviewLabel: 'मास्टर आउटपुट प्रीव्यू (ऐसा गहरा रिजल्ट मिलेगा)',
         inputsCountSuffix: 'कस्टम इनपुट्स',
         openStudioBtn: 'Open Mega-Studio',
@@ -303,9 +301,45 @@
     };
 
     const builtInPrompts = [
-      /*CUSTOM_START_mp_1792594260343*/
-      {"id":"mp_1792594260343","category":"Business & Content","badge":"📈 Growth Master","model":"Best for: Gemini / ChatGPT / Claude","title":{"en":"Meta Ads & SEO: Zero-to-Top 1% Growth Mastery Engine","hi":"Meta Ads और SEO: जीरो से एडवांस मास्टरी इंजन"},"desc":{"en":"Master Meta Ads (Facebook/Instagram) and Google SEO from absolute zero to advanced campaign scaling, ROAS optimization, and #1 search ranking.","hi":"बिना किसी पुरानी नॉलेज के Meta Ads और SEO को बिल्कुल बेसिक से एडवांस लेवल (कैंपेन सेटअप, ROAS और रैंकिंग) तक स्टेप-बाय-स्टेप सीखें और लागू करें।"},"content":"[SYSTEM ROLE & GROWTH MARKETING ARCHITECTURE]\nAct as a Chief Performance Marketing Officer (CMO) & Technical SEO Director who has scaled startups from zero to $50M+. Take me from absolute beginner (Zero Knowledge) to Top 1% Advanced execution in [FOCUS_AREA_META_ADS_OR_SEO].\n\n[USER CONTEXT & PARAMETERS]\n- Primary Skill / Channel to Master: [FOCUS_AREA_META_ADS_OR_SEO]\n- Business Niche or Project Type: [NICHE_OR_BUSINESS_TYPE]\n- Monthly Practice Budget / Target Goal: [BUDGET_OR_TARGET_GOAL]\n- Preferred Language (Simple Hinglish/English/Hindi): [OUTPUT_LANGUAGE]\n\n[STRICT ANTI-FLUFF PROTOCOL]\n- Do NOT give generic textbook definitions. Explain how the 2026 algorithm actually works in real life.\n- Use simple everyday examples, exact campaign/keyword tables, and step-by-step screen actions.\n\n[MANDATORY 5-STAGE MASTERY & EXECUTION BLUEPRINT]\n1. ALGORITHM INTUITION (Zero-Level Foundation): Explain how Meta's Andromeda AI Auction or Google's Search Intent Engine actually decides who wins, using a simple real-world analogy.\n2. THE 80/20 ACCOUNT & CAMPAIGN ARCHITECTURE (Markdown Table):\n   - For Meta Ads: Campaign structure (CBO vs ABO), Broad vs Interest targeting, 3:2:2 Creative Testing Matrix, and Hook/Hold rate benchmarks.\n   - For SEO: High-Intent Keyword Matrix, On-Page Topical Authority, Technical Core Web Vitals, and Backlink acquisition.\n3. ZERO-TO-LIVE STEP-BY-STEP LAUNCH GUIDE: Exact click-by-click setup from Day 1 for [NICHE_OR_BUSINESS_TYPE] within [BUDGET_OR_TARGET_GOAL].\n4. METRICS FORENSICS & SCALING RULES: How to read CPM, CTR, CPA, ROAS (or Impressions, KD, DR) and exact IF/THEN rules on when to kill or scale a campaign/page.\n5. TOP 3 MONEY-BURNING MISTAKES & 30-DAY MASTERY ROADMAP: What 95% of beginners do wrong and a week-by-week practical action plan.","sampleOutput":{"en":"🎯 1. Algorithm Breakdown: How creative hooks drive 80% of Meta targeting in 2026...\n📊 2. Campaign & Keyword Matrix Table: Exact budget split, CTR > 1.8% & ROAS scaling rules...\n🚀 3. 30-Day Practical Roadmap from Beginner to Pro.","hi":"🎯 1. एल्गोरिदम का असली खेल: आसान भाषा में Meta Ads और Google रैंकिंग का पूरा गणित...\n📊 2. कैंपेन और कीवर्ड टेबल: कम बजट में टेस्टिंग, CTR और ROAS बढ़ाने का स्टेप-बाय-स्टेप फॉर्मूला...\n🚀 3. 30-दिन का प्रैक्टिकल रोडमैप।"}},
-      /*CUSTOM_END_mp_1792594260343*/
+      {
+        id: 'mp9',
+        category: 'Business & Content',
+        badge: '📈 Growth Master',
+        model: 'Best for: Gemini / ChatGPT / Claude',
+        title: {
+          en: 'Meta Ads & SEO: Zero-to-Top 1% Growth Mastery Engine',
+          hi: 'Meta Ads और SEO: जीरो से एडवांस मास्टरी इंजन'
+        },
+        desc: {
+          en: 'Master Meta Ads (Facebook/Instagram) and Google SEO from absolute zero to advanced campaign scaling, ROAS optimization, and #1 search ranking.',
+          hi: 'बिना किसी पुरानी नॉलेज के Meta Ads और SEO को बिल्कुल बेसिक से एडवांस लेवल (कैंपेन सेटअप, ROAS और रैंकिंग) तक स्टेप-बाय-स्टेप सीखें और लागू करें।'
+        },
+        content: `[SYSTEM ROLE & GROWTH MARKETING ARCHITECTURE]
+Act as a Chief Performance Marketing Officer (CMO) & Technical SEO Director who has scaled brands from zero to market leadership. Take me from absolute beginner (Zero Knowledge) to Top 1% Advanced execution in [FOCUS_AREA_META_ADS_OR_SEO].
+
+[USER CONTEXT & PARAMETERS]
+- Primary Skill / Channel to Master: [FOCUS_AREA_META_ADS_OR_SEO]
+- Business Niche or Project Type: [NICHE_OR_BUSINESS_TYPE]
+- Monthly Practice Budget / Target Goal: [BUDGET_OR_TARGET_GOAL]
+- Preferred Language (Simple Hinglish/English/Hindi): [OUTPUT_LANGUAGE]
+
+[STRICT ANTI-FLUFF PROTOCOL]
+- Do NOT give generic textbook definitions. Explain how the 2026 algorithm actually works in real life.
+- Use simple everyday examples, exact campaign/keyword tables, and step-by-step screen actions.
+
+[MANDATORY 5-STAGE MASTERY & EXECUTION BLUEPRINT]
+1. ALGORITHM INTUITION (Zero-Level Foundation): Explain how Meta's AI Ad Auction or Google's Search Intent Engine actually decides who wins, using a simple real-world analogy.
+2. THE 80/20 ACCOUNT & CAMPAIGN ARCHITECTURE (Markdown Table):
+   - For Meta Ads: Campaign structure (CBO vs ABO), Broad vs Interest targeting, 3:2:2 Creative Testing Matrix, and Hook/Hold rate benchmarks.
+   - For SEO: High-Intent Keyword Matrix, On-Page Topical Authority, Technical Core Web Vitals, and Backlink acquisition.
+3. ZERO-TO-LIVE STEP-BY-STEP LAUNCH GUIDE: Exact click-by-click setup from Day 1 for [NICHE_OR_BUSINESS_TYPE] within [BUDGET_OR_TARGET_GOAL].
+4. METRICS FORENSICS & SCALING RULES: How to read CPM, CTR, CPA, ROAS (or Impressions, KD, DR) and exact IF/THEN rules on when to kill or scale a campaign/page.
+5. TOP 3 MONEY-BURNING MISTAKES & 30-DAY MASTERY ROADMAP: What 95% of beginners do wrong and a week-by-week practical action plan.`,
+        sampleOutput: {
+          en: `🎯 1. Algorithm Breakdown: How creative hooks drive 80% of Meta targeting in 2026...\n📊 2. Campaign & Keyword Matrix Table: Exact budget split, CTR > 1.8% & ROAS scaling rules...\n🚀 3. 30-Day Practical Roadmap from Beginner to Pro.`,
+          hi: `🎯 1. एल्गोरिदम का असली खेल: आसान भाषा में Meta Ads और Google रैंकिंग का पूरा गणित...\n📊 2. कैंपेन और कीवर्ड टेबल: कम बजट में टेस्टिंग, CTR और ROAS बढ़ाने का स्टेप-बाय-स्टेप फॉर्मूला...\n🚀 3. 30-दिन का प्रैक्टिकल रोडमैप।`
+        }
+      },
       {
         id: 'mp1',
         category: 'Finance & Markets',
@@ -509,56 +543,35 @@ Deliver: 1. Painkiller Positioning, 2. 3-Tier Pricing Table, 3. ₹0 First 1,000
 
     let masterPrompts = [...builtInPrompts];
 
-    async function syncCloudPrompts() {
-      if (!sb) return;
+    // 1-SECOND REAL-TIME GITHUB LIVE SYNC (BYPASSES VERCEL BUILD DELAY & BROWSER CACHE)
+    async function syncLiveGitHubPrompts() {
       try {
-        const { data, error } = await sb.from('prompts').select('*').order('created_at', { ascending: false });
-        if (!error && data) {
-          const cloudItems = [];
-          const deletedIds = new Set();
+        const res = await fetch('https://api.github.com/repos/surya333555/AI-Vault/contents/index.html?t=' + Date.now(), {
+          cache: 'no-store',
+          headers: { Accept: 'application/vnd.github+json' }
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        const rawHtml = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
 
-          data.forEach(row => {
-            if (row.category === '__DELETED__') {
-              deletedIds.add(row.id.replace('del_', ''));
-              return;
-            }
-            let parsed = null;
-            if (row.content && row.content.trim().startsWith('{')) {
-              try { parsed = JSON.parse(row.content); } catch (e) {}
-            }
-            if (parsed && parsed.promptText) {
-              cloudItems.push({
-                id: row.id,
-                category: row.category || 'Business & Content',
-                badge: parsed.badge || '✨ Cloud Pro',
-                model: row.model || 'Best for: Gemini / ChatGPT',
-                title: { en: row.title || 'Custom Mega-Prompt', hi: parsed.titleHi || row.title || 'कस्टम मेगा-प्रॉम्प्ट' },
-                desc: { en: parsed.descEn || 'Verified 5-Layer Mega-Prompt.', hi: parsed.descHi || parsed.descEn || 'वेरिफाइड 5-लेयर मेगा-प्रॉम्प्ट।' },
-                content: parsed.promptText,
-                sampleOutput: { en: parsed.outEn || 'Structured expert output with tables and action plan.', hi: parsed.outHi || parsed.outEn || 'डेटा टेबल और स्टेप-बाय-स्टेप एक्सपर्ट आउटपुट।' }
-              });
-            } else if (row.title && row.content) {
-              cloudItems.push({
-                id: row.id,
-                category: row.category || 'Business & Content',
-                badge: '✨ Custom',
-                model: 'Best for: ' + (row.model || 'All AI Models'),
-                title: { en: row.title, hi: row.title },
-                desc: { en: 'Custom Master Prompt synced from Cloud Admin.', hi: 'क्लाउड एडमिन द्वारा जोड़ा गया मास्टर प्रॉम्प्ट।' },
-                content: row.content,
-                sampleOutput: { en: 'Structured expert output.', hi: 'एक्सपर्ट आउटपुट।' }
-              });
-            }
+        const regex = /\/\*CUSTOM_START_(mp_\d+)\*\/\s*(\{.*?\}),\s*\/\*CUSTOM_END_\1\*\//gs;
+        const matches = [...rawHtml.matchAll(regex)];
+        if (matches.length > 0) {
+          const liveCustom = [];
+          matches.forEach(m => {
+            try {
+              const obj = JSON.parse(m[2]);
+              if (obj && obj.title && obj.content) liveCustom.push(obj);
+            } catch (e) {}
           });
 
-          const cloudIds = new Set(cloudItems.map(c => c.id));
-          const filteredBuiltIn = builtInPrompts.filter(b => !deletedIds.has(b.id) && !cloudIds.has(b.id));
-          masterPrompts = [...cloudItems, ...filteredBuiltIn];
-          document.getElementById('total-count').innerText = masterPrompts.length;
+          const existingTitles = new Set(builtInPrompts.map(b => b.title.en.toLowerCase()));
+          const uniqueCustom = liveCustom.filter(c => !existingTitles.has((c.title.en || '').toLowerCase()));
+          masterPrompts = [...uniqueCustom, ...builtInPrompts];
           renderPromptGrid();
         }
-      } catch (err) {
-        console.log('Using default prompts');
+      } catch (e) {
+        console.log('Live GitHub sync standby');
       }
     }
 
@@ -722,7 +735,7 @@ Deliver: 1. Painkiller Positioning, 2. 3-Tier Pricing Table, 3. ₹0 First 1,000
         `;
       }).join('');
 
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     function openStudioModal(id) {
@@ -759,7 +772,7 @@ Deliver: 1. Painkiller Positioning, 2. 3-Tier Pricing Table, 3. ₹0 First 1,000
 
       updateLivePromptBox();
       document.getElementById('studio-modal').classList.remove('hidden');
-      lucide.createIcons();
+      if (window.lucide) lucide.createIcons();
     }
 
     function onVarInput(k, val) {
@@ -825,7 +838,7 @@ Deliver: 1. Painkiller Positioning, 2. 3-Tier Pricing Table, 3. ₹0 First 1,000
     }
 
     setLanguage('en');
-    syncCloudPrompts();
+    syncLiveGitHubPrompts();
   </script>
 </body>
 </html>
