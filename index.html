@@ -6,7 +6,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <title>NexaPrompt AI — Next-Gen 5-Layer Prompt Engineering Studio</title>
+  <title>NexaPrompt AI — 5-Layer Prompt Studio (Simple Language + Desi Examples)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -18,7 +18,7 @@
 
     html, body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #03050c !important;
+      background-color: #02040a !important;
       color: #f8fafc !important;
       -webkit-tap-highlight-color: transparent;
       overflow-x: hidden;
@@ -29,119 +29,123 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* CYBER GRID + ANIMATED AURORA BACKDROP */
-    .cyber-bg {
-      background-color: #03050c;
+    /* OBSIDIAN ARCHITECTURAL GRID */
+    .obsidian-grid {
+      background-color: #02040a;
       background-image: 
-        linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
-      background-size: 44px 44px;
+        radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.16) 0%, transparent 55%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 56px 56px, 56px 56px;
     }
 
-    @keyframes auroraFloat {
+    @keyframes floatSlow {
       0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-      50% { transform: translate3d(25px, -20px, 0) scale(1.08); }
+      50% { transform: translate3d(30px, -25px, 0) scale(1.08); }
     }
 
-    @keyframes textGradientShift {
+    @keyframes shimmerText {
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
 
-    @keyframes cardSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(22px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes revealUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.25); }
-      50% { box-shadow: 0 0 35px rgba(139, 92, 246, 0.45); }
-    }
+    .orb-float-1 { animation: floatSlow 12s ease-in-out infinite; }
+    .orb-float-2 { animation: floatSlow 16s ease-in-out infinite reverse; }
 
-    .aurora-orb-1 {
-      animation: auroraFloat 10s ease-in-out infinite;
-    }
-    .aurora-orb-2 {
-      animation: auroraFloat 14s ease-in-out infinite reverse;
-    }
-
-    .animated-gradient-text {
-      background: linear-gradient(270deg, #818cf8, #c084fc, #f472b6, #38bdf8, #818cf8);
+    .text-shimmer {
+      background: linear-gradient(270deg, #a5b4fc, #e879f9, #38bdf8, #34d399, #a5b4fc);
       background-size: 300% 300%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: textGradientShift 7s ease infinite;
+      animation: shimmerText 8s ease infinite;
     }
 
-    /* FLOATING GLASS NAVBAR */
-    .glass-nav {
-      background: rgba(8, 12, 26, 0.78);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: 0 12px 35px -10px rgba(0, 0, 0, 0.7);
+    /* SPECULAR GLASS NAVBAR */
+    .specular-nav {
+      background: rgba(5, 8, 18, 0.78);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
     }
 
-    /* NEXT-GEN BENTO GLASS CARDS */
+    /* TRUE GLASSMORPHISM BENTO CARD WITH SPECULAR TOP HIGHLIGHT & SPOTLIGHT */
     .bento-card {
       position: relative;
-      background: linear-gradient(165deg, rgba(17, 25, 48, 0.88) 0%, rgba(9, 13, 28, 0.96) 100%);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(148, 163, 184, 0.16);
-      box-shadow: 0 14px 35px -12px rgba(0, 0, 0, 0.8);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: cardSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+      background: linear-gradient(165deg, rgba(15, 23, 42, 0.75) 0%, rgba(6, 10, 22, 0.94) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+      transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: revealUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
       overflow: hidden;
     }
 
+    /* Top Specular Light Line */
     .bento-card::before {
       content: '';
       position: absolute;
       top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--card-accent, linear-gradient(90deg, #6366f1, #a855f7));
-      opacity: 0.85;
-      transition: height 0.25s ease, opacity 0.25s ease;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: var(--card-accent, linear-gradient(90deg, transparent, #818cf8, transparent));
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    /* Interactive Cursor/Touch Spotlight Glow */
+    .bento-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px circle at var(--mouse-x, 50%) var(--mouse-y, 0%), var(--card-spotlight, rgba(99, 102, 241, 0.14)), transparent 45%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
 
     .bento-card:hover {
-      transform: translateY(-6px) scale(1.008);
-      border-color: var(--card-border-hover, rgba(99, 102, 241, 0.55));
-      box-shadow: 0 24px 50px -15px var(--card-glow, rgba(99, 102, 241, 0.3));
+      transform: translateY(-5px);
+      border-color: var(--card-border, rgba(129, 140, 248, 0.45));
+      box-shadow: 0 28px 60px -15px var(--card-shadow, rgba(99, 102, 241, 0.28)), inset 0 1px 0 0 rgba(255, 255, 255, 0.35);
     }
 
-    .bento-card:hover::before {
-      height: 4px;
+    .bento-card:hover::after {
       opacity: 1;
     }
 
-    /* TERMINAL PREVIEW BOX INSIDE CARD */
-    .terminal-box {
-      background: rgba(3, 6, 15, 0.92);
-      border: 1px solid rgba(148, 163, 184, 0.14);
-      box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.6);
+    .bento-card:hover::before {
+      left: 0%;
+      right: 0%;
+      height: 3px;
     }
 
-    /* SEARCH COMMAND BAR */
-    .search-command {
-      background: rgba(13, 19, 38, 0.9);
-      border: 1.5px solid rgba(99, 102, 241, 0.35);
-      animation: pulseGlow 5s infinite ease-in-out;
-      transition: all 0.25s ease;
+    /* TERMINAL OUTPUT WINDOW */
+    .obsidian-terminal {
+      background: rgba(2, 4, 10, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.75);
     }
 
-    .search-command:focus-within {
-      border-color: #818cf8;
-      box-shadow: 0 0 40px rgba(99, 102, 241, 0.45);
-      transform: scale(1.01);
+    /* SLIDE-OVER STUDIO DRAWER */
+    .studio-drawer-backdrop {
+      background: rgba(2, 4, 10, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .studio-drawer-panel {
+      background: linear-gradient(180deg, #0b1120 0%, #050811 100%);
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: -25px 0 70px rgba(0, 0, 0, 0.9);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .var-highlight {
@@ -153,299 +157,268 @@
       border: 1px dashed #818cf8;
     }
 
-    /* CUSTOM SCROLLBAR */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #060913;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 9999px;
-    }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #02040a; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col cyber-bg relative">
+<body class="min-h-screen flex flex-col obsidian-grid relative">
 
-  <!-- AMBIENT FLOATING AURORA ORBS -->
+  <!-- BACKGROUND AURORA LIGHT SPHERES -->
   <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="aurora-orb-1 absolute -top-32 -left-24 w-96 h-96 rounded-full bg-indigo-600/20 blur-[120px]"></div>
-    <div class="aurora-orb-2 absolute top-16 -right-24 w-96 h-96 rounded-full bg-fuchsia-600/15 blur-[130px]"></div>
-    <div class="aurora-orb-1 absolute bottom-10 left-1/3 w-80 h-80 rounded-full bg-cyan-500/10 blur-[120px]"></div>
+    <div class="orb-float-1 absolute -top-36 left-1/4 w-[420px] h-[420px] rounded-full bg-indigo-600/15 blur-[130px]"></div>
+    <div class="orb-float-2 absolute top-1/3 -right-28 w-[380px] h-[380px] rounded-full bg-fuchsia-600/12 blur-[140px]"></div>
+    <div class="orb-float-1 absolute bottom-0 left-10 w-[340px] h-[340px] rounded-full bg-emerald-500/10 blur-[130px]"></div>
   </div>
 
-  <!-- FLOATING GLASS TOP NAVBAR -->
-  <header class="sticky top-3 z-40 px-3 sm:px-6">
-    <div class="max-w-7xl mx-auto glass-nav rounded-2xl px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+  <!-- FLOATING SPECULAR GLASS HEADER -->
+  <header class="sticky top-3 z-30 px-3 sm:px-6">
+    <div class="max-w-7xl mx-auto specular-nav rounded-2xl px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
       
-      <!-- Brand Identity -->
+      <!-- Brand Logo -->
       <div class="flex items-center gap-3 cursor-pointer" onclick="setCategory('All'); setSavedFilter(false); resetSearch();">
         <div class="relative">
-          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-500 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-indigo-500/40">
-            <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-violet-600 to-fuchsia-500 flex items-center justify-center shadow-lg shadow-indigo-500/40">
+            <i data-lucide="sparkles" class="w-5 h-5 text-white"></i>
           </div>
-          <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-slate-950"></span>
+          <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-black"></span>
         </div>
         <div>
           <div class="flex items-center gap-2">
             <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white">NexaPrompt</span>
-            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-500 to-purple-500 text-white tracking-wider uppercase shadow">
-              AI 2.0
+            <span class="text-[10px] font-extrabold px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 uppercase tracking-wider">
+              STUDIO 3.0
             </span>
           </div>
-          <p id="nav-subtitle" class="text-[11px] text-slate-300 hidden sm:block font-medium">
-            5-Layer Prompt Engine • Simple Language + Real-Life Examples
+          <p id="nav-subtitle" class="text-[11px] text-slate-400 hidden sm:block font-medium">
+            5-Layer Mega-Prompts • Explained with Real-Life Desi Examples
           </p>
         </div>
       </div>
 
-      <!-- Navigation Actions -->
+      <!-- Right Controls -->
       <div class="flex flex-wrap items-center gap-2">
-        <button onclick="setSavedFilter(false)" id="btn-explore" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white flex items-center gap-1.5 shadow-lg shadow-indigo-600/30 transition-all">
+        <button onclick="setSavedFilter(false)" id="btn-explore" class="px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white flex items-center gap-1.5 shadow-lg shadow-indigo-600/30 transition">
           <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
-          <span id="txt-explore">Explore</span>
+          <span id="txt-explore">Bento Studio</span>
         </button>
 
-        <button onclick="setSavedFilter(true)" id="btn-saved" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900/90 text-slate-200 border border-slate-700/80 hover:border-amber-400/60 flex items-center gap-1.5 transition-all">
+        <button onclick="setSavedFilter(true)" id="btn-saved" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-amber-400/50 flex items-center gap-1.5 transition">
           <i data-lucide="bookmark" class="w-3.5 h-3.5 text-amber-400"></i>
           <span id="txt-saved">Saved</span>
-          <span id="saved-counter" class="px-1.5 py-0.2 rounded-md bg-amber-500/20 text-amber-300 text-[11px] font-extrabold">0</span>
+          <span id="saved-counter" class="px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 text-[11px] font-extrabold">0</span>
         </button>
 
-        <div class="flex items-center bg-slate-950/90 border border-slate-700/80 rounded-xl p-1">
-          <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition-all">EN</button>
-          <button onclick="setLanguage('hi')" id="lang-hi" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition-all">हिंदी</button>
+        <div class="flex items-center bg-black/80 border border-slate-800 rounded-xl p-1">
+          <button onclick="setLanguage('en')" id="lang-en" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition">EN</button>
+          <button onclick="setLanguage('hi')" id="lang-hi" class="px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition">हिंदी</button>
         </div>
       </div>
 
     </div>
   </header>
 
-  <!-- NEXT-GEN HERO SECTION -->
-  <section class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-8 text-center">
-    
-    <!-- Animated Status Pill -->
-    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/40 text-indigo-200 text-xs font-bold mb-6 shadow-xl">
-      <span class="relative flex h-2.5 w-2.5">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-      </span>
-      <span id="hero-badge">Zero Jargon Engine — Every Complex Concept Explained with Desi Examples</span>
+  <!-- SPLIT HERO + INTERACTIVE "NORMAL vs NEXA" LIVE SWITCHER -->
+  <section class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+      
+      <!-- Left Column: Hero Pitch + Command Search -->
+      <div class="lg:col-span-7 text-left space-y-5">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-950/60 border border-indigo-500/40 text-indigo-300 text-xs font-bold shadow">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span id="hero-badge">Zero Jargon Lock — Hard Concepts Explained Like a Friend</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-[1.12]">
+          <span id="hero-title-1">Turn AI Into Your Personal Mentor with</span>
+          <span class="text-shimmer block mt-1">
+            5-Layer Mega-Prompts
+          </span>
+        </h1>
+
+        <p id="hero-desc" class="text-sm sm:text-base text-slate-300 leading-relaxed font-medium max-w-2xl">
+          Normal 1-line prompts give confusing textbook jargon. Our 5-Layer architecture forces ChatGPT, Gemini & Claude to explain every technical word using relatable shopkeeper/cricket examples + pro tables + step-by-step action plans.
+        </p>
+
+        <!-- Command Search Box -->
+        <div class="max-w-xl">
+          <div class="flex items-center bg-slate-900/95 border-2 border-indigo-500/40 focus-within:border-indigo-400 rounded-2xl px-4 py-2.5 shadow-2xl transition">
+            <i data-lucide="search" class="w-5 h-5 text-indigo-400 mr-3 shrink-0"></i>
+            <input
+              type="text"
+              id="search-box"
+              oninput="renderPromptGrid()"
+              placeholder="Search Mega-Prompts (e.g., Meta Ads, SEO, IPO, SIP, 4K Video, Study)..."
+              class="w-full py-1 bg-transparent text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none font-medium"
+            />
+            <button onclick="resetSearch()" id="clear-search-btn" class="hidden px-2.5 py-1 rounded-lg bg-slate-800 text-xs font-bold text-rose-300 hover:text-white mr-2">
+              Clear
+            </button>
+          </div>
+
+          <!-- Quick Filter Chips -->
+          <div class="flex flex-wrap items-center gap-1.5 mt-2.5 text-xs">
+            <span class="text-slate-400 font-semibold mr-1">Instant Filter:</span>
+            <button onclick="quickSearch('Meta Ads')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold transition">🔥 Meta Ads & SEO</button>
+            <button onclick="quickSearch('IPO')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-bold transition">📈 IPO Checkup</button>
+            <button onclick="quickSearch('4K')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30 font-bold transition">🎬 4K Video AI</button>
+            <button onclick="quickSearch('SIP')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold transition">🏏 SIP Cricket Audit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive "Before vs After" Live Comparison Widget -->
+      <div class="lg:col-span-5">
+        <div class="bento-card rounded-3xl p-5 border border-indigo-500/30 shadow-2xl">
+          <div class="flex items-center justify-between gap-2 pb-3 mb-3 border-b border-slate-800">
+            <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+              <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i> Live Output Difference
+            </span>
+            <div class="flex items-center bg-black/80 p-1 rounded-xl border border-slate-800">
+              <button onclick="switchDemoMode('normal')" id="demo-btn-normal" class="px-2.5 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-white transition">
+                ❌ Normal Prompt
+              </button>
+              <button onclick="switchDemoMode('nexa')" id="demo-btn-nexa" class="px-2.5 py-1 rounded-lg text-[11px] font-extrabold bg-emerald-600 text-white shadow transition">
+                ⚡ Nexa 5-Layer
+              </button>
+            </div>
+          </div>
+
+          <div id="demo-box-content" class="obsidian-terminal rounded-2xl p-4 text-xs space-y-2.5 min-h-[185px] flex flex-col justify-between">
+            <!-- Populated dynamically by switchDemoMode() -->
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Hero Headline -->
-    <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-[1.12] mb-5">
-      <span id="hero-title-1">Unlock Top 1% AI Outputs in</span>
-      <span class="animated-gradient-text block sm:inline mt-1 sm:mt-0">
-        Simple Everyday Language
-      </span>
-    </h1>
-
-    <p id="hero-desc" class="text-sm sm:text-lg text-slate-300 max-w-3xl mx-auto mb-8 leading-relaxed font-medium">
-      Stop getting confusing textbook answers. Our 5-Layer Mega-Prompts force ChatGPT, Gemini & Claude to explain every technical term using relatable daily-life examples, comparison tables, and step-by-step action plans.
-    </p>
-
-    <!-- 4 MICRO-FEATURE PILLS (TRUST BAR) -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 max-w-3xl mx-auto mb-8">
-      <div class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3 flex items-center gap-2.5 text-left">
-        <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center shrink-0 text-indigo-400">
-          <i data-lucide="layers" class="w-4 h-4"></i>
-        </div>
-        <div>
-          <div class="text-xs font-extrabold text-white" id="stat-1-t">5-Layer Engine</div>
-          <div class="text-[10px] text-slate-400" id="stat-1-d">Deep System Architecture</div>
-        </div>
-      </div>
-
-      <div class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3 flex items-center gap-2.5 text-left">
-        <div class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0 text-emerald-400">
-          <i data-lucide="lightbulb" class="w-4 h-4"></i>
-        </div>
-        <div>
-          <div class="text-xs font-extrabold text-white" id="stat-2-t">Desi Examples</div>
-          <div class="text-[10px] text-slate-400" id="stat-2-d">Beginner-Friendly Logic</div>
-        </div>
-      </div>
-
-      <div class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3 flex items-center gap-2.5 text-left">
-        <div class="w-8 h-8 rounded-xl bg-fuchsia-500/20 border border-fuchsia-500/30 flex items-center justify-center shrink-0 text-fuchsia-400">
-          <i data-lucide="sliders" class="w-4 h-4"></i>
-        </div>
-        <div>
-          <div class="text-xs font-extrabold text-white" id="stat-3-t">Live Customizer</div>
-          <div class="text-[10px] text-slate-400" id="stat-3-d">Auto-Inject Your Details</div>
-        </div>
-      </div>
-
-      <div class="bg-slate-900/75 border border-slate-800 rounded-2xl p-3 flex items-center gap-2.5 text-left">
-        <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center shrink-0 text-amber-400">
-          <i data-lucide="zap" class="w-4 h-4"></i>
-        </div>
-        <div>
-          <div class="text-xs font-extrabold text-white" id="stat-4-t">1-Click Launch</div>
-          <div class="text-[10px] text-slate-400" id="stat-4-d">ChatGPT, Gemini, Claude</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- GLOWING COMMAND SEARCH BAR -->
-    <div class="max-w-2xl mx-auto mb-6">
-      <div class="search-command rounded-2xl px-4 py-2.5 flex items-center">
-        <i data-lucide="search" class="w-5 h-5 text-indigo-400 mr-3 shrink-0"></i>
-        <input
-          type="text"
-          id="search-box"
-          oninput="renderPromptGrid()"
-          placeholder="Search Mega-Prompts (e.g., Meta Ads, SEO, IPO, SIP, 4K Video, Study, SaaS)..."
-          class="w-full py-1.5 bg-transparent text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none font-medium"
-        />
-        <button onclick="resetSearch()" id="clear-search-btn" class="hidden px-3 py-1 rounded-lg bg-slate-800 text-xs font-bold text-rose-300 hover:text-white mr-2">
-          Clear
-        </button>
-        <span class="hidden sm:inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-[11px] font-mono-code text-slate-400">
-          ⚡ Instant
-        </span>
-      </div>
-
-      <!-- Quick Trending Search Tags -->
-      <div class="flex flex-wrap items-center justify-center gap-1.5 mt-3 text-xs">
-        <span class="text-slate-400 font-semibold mr-1" id="quick-try-label">Trending:</span>
-        <button onclick="quickSearch('Meta Ads')" class="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-indigo-600/30 text-slate-300 hover:text-white border border-slate-800 transition">🔥 Meta Ads & SEO</button>
-        <button onclick="quickSearch('IPO')" class="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-emerald-600/30 text-slate-300 hover:text-white border border-slate-800 transition">📈 IPO Checkup</button>
-        <button onclick="quickSearch('4K')" class="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-fuchsia-600/30 text-slate-300 hover:text-white border border-slate-800 transition">🎬 4K Video AI</button>
-        <button onclick="quickSearch('SIP')" class="px-2.5 py-1 rounded-lg bg-slate-900/90 hover:bg-amber-600/30 text-slate-300 hover:text-white border border-slate-800 transition">💰 SIP Audit</button>
-      </div>
-    </div>
-
-    <!-- CATEGORY FILTER DOCK -->
-    <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
-      <button onclick="setCategory('All')" data-cat="All" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition-all">
-        ✨ All Studio Prompts (<span id="total-count">9</span>)
+    <!-- CATEGORY FILTER BAR -->
+    <div class="flex flex-wrap items-center justify-start sm:justify-center gap-2 pt-8">
+      <button onclick="setCategory('All')" data-cat="All" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition">
+        ✨ All Bento Prompts (<span id="total-count">9</span>)
       </button>
-      <button onclick="setCategory('Business & Content')" data-cat="Business & Content" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-amber-400/60 transition-all">
+      <button onclick="setCategory('Business & Content')" data-cat="Business & Content" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-amber-400/50 transition">
         ⚡ Business & Marketing
       </button>
-      <button onclick="setCategory('Finance & Markets')" data-cat="Finance & Markets" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-emerald-400/60 transition-all">
+      <button onclick="setCategory('Finance & Markets')" data-cat="Finance & Markets" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-emerald-400/50 transition">
         📊 Finance & Markets
       </button>
-      <button onclick="setCategory('4K Video & Image AI')" data-cat="4K Video & Image AI" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-fuchsia-400/60 transition-all">
+      <button onclick="setCategory('4K Video & Image AI')" data-cat="4K Video & Image AI" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-fuchsia-400/50 transition">
         🎬 4K Video & Image AI
       </button>
-      <button onclick="setCategory('Study & Research')" data-cat="Study & Research" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-cyan-400/60 transition-all">
+      <button onclick="setCategory('Study & Research')" data-cat="Study & Research" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-cyan-400/50 transition">
         🎓 Study & Deep Research
       </button>
-      <button onclick="setCategory('Coding & Projects')" data-cat="Coding & Projects" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-violet-400/60 transition-all">
+      <button onclick="setCategory('Coding & Projects')" data-cat="Coding & Projects" class="cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-violet-400/50 transition">
         🚀 No-Code App Builder
       </button>
     </div>
   </section>
 
-  <!-- BENTO CARDS GRID -->
+  <!-- ASYMMETRIC BENTO GRID (MIXED WIDE SPOTLIGHT + VERTICAL CARDS) -->
   <main class="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 py-4 pb-24 flex-1">
     <div id="prompt-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </main>
 
-  <!-- MODERN MINIMAL FOOTER -->
-  <footer class="relative z-10 border-t border-slate-800/80 bg-slate-950/90 py-8 px-4">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+  <!-- CLEAN MINIMAL FOOTER -->
+  <footer class="relative z-10 border-t border-slate-900 bg-black/90 py-8 px-4">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-400">
       <div class="flex items-center gap-2.5">
-        <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-extrabold text-xs">N</div>
+        <div class="w-6 h-6 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-extrabold text-xs">N</div>
         <span class="text-white font-extrabold">NexaPrompt AI</span>
-        <span>— Precision 5-Layer Prompt Studio</span>
+        <span>— Asymmetric Bento Prompt Studio</span>
       </div>
-
       <div class="flex items-center gap-3">
-        <div class="flex items-center gap-2 text-xs font-bold bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-xl">
-          <span class="text-slate-400">Language:</span>
-          <button onclick="setLanguage('en')" class="text-white hover:text-indigo-400">English</button>
-          <span>•</span>
-          <button onclick="setLanguage('hi')" class="text-slate-300 hover:text-indigo-400">हिंदी</button>
-        </div>
+        <button onclick="setLanguage('en')" class="hover:text-white font-bold">English</button>
+        <span>•</span>
+        <button onclick="setLanguage('hi')" class="hover:text-white font-bold">हिंदी</button>
       </div>
     </div>
   </footer>
 
-  <!-- INTERACTIVE MEGA-PROMPT STUDIO MODAL -->
-  <div id="studio-modal" class="fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6">
-    <div class="bg-slate-900 border-2 border-indigo-500/40 rounded-3xl max-w-5xl w-full max-h-[92vh] overflow-y-auto shadow-2xl flex flex-col">
+  <!-- APP-STYLE SLIDE-OVER STUDIO DRAWER (REPLACES OLD BORING POP-UP) -->
+  <div id="studio-modal" class="fixed inset-0 z-50 hidden studio-drawer-backdrop flex justify-end">
+    <div class="studio-drawer-panel w-full max-w-3xl h-full overflow-y-auto flex flex-col justify-between">
       
-      <!-- Modal Sticky Top Bar -->
-      <div class="p-5 sm:p-6 border-b border-slate-800 flex items-start justify-between gap-4 sticky top-0 bg-slate-900/95 backdrop-blur-md z-10">
+      <!-- Sticky Top Studio Header -->
+      <div class="p-5 sm:p-6 border-b border-slate-800/90 flex items-start justify-between gap-4 sticky top-0 bg-slate-950/95 backdrop-blur-xl z-20">
         <div>
           <div class="flex flex-wrap items-center gap-2 mb-2">
-            <span id="m-category" class="text-xs font-extrabold px-3 py-1 rounded-lg bg-indigo-600 text-white"></span>
-            <span id="m-tool" class="text-xs font-bold px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"></span>
-            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30">Simple Language + Examples</span>
+            <span id="m-category" class="text-[11px] font-extrabold px-3 py-1 rounded-full bg-indigo-600 text-white"></span>
+            <span id="m-tool" class="text-[11px] font-bold px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"></span>
+            <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">Simple + Desi Examples</span>
           </div>
-          <h2 id="m-title" class="text-xl sm:text-2xl font-extrabold text-white"></h2>
+          <h2 id="m-title" class="text-lg sm:text-2xl font-extrabold text-white leading-snug"></h2>
           <p id="m-desc" class="text-xs sm:text-sm text-slate-300 mt-1 font-medium"></p>
         </div>
-        <button onclick="closeStudioModal()" class="p-2.5 rounded-xl bg-slate-800 text-slate-200 hover:bg-rose-600 hover:text-white transition">
+        <button onclick="closeStudioModal()" class="p-2.5 rounded-xl bg-slate-800 text-slate-200 hover:bg-rose-600 hover:text-white transition shrink-0">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
 
-      <!-- Modal Body -->
-      <div class="p-5 sm:p-6 space-y-6">
+      <!-- Studio Workspace Body -->
+      <div class="p-5 sm:p-6 space-y-6 flex-1">
         
-        <!-- Customizer Variables Box -->
-        <div id="m-vars-section" class="bg-slate-950/90 border border-indigo-500/40 rounded-2xl p-5 shadow-inner">
-          <div class="flex items-center gap-2 mb-3.5">
-            <div class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-extrabold">1</div>
-            <h3 id="m-step1-label" class="text-xs sm:text-sm font-extrabold text-indigo-300 uppercase tracking-wider">
-              Fill Your Details Below (Auto-Updates Prompt Live)
-            </h3>
+        <!-- Step 1: Interactive Variables Customizer -->
+        <div id="m-vars-section" class="bg-slate-900/90 border border-indigo-500/40 rounded-2xl p-5 shadow-lg">
+          <div class="flex items-center justify-between mb-3.5">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-extrabold">1</span>
+              <h3 id="m-step1-label" class="text-xs sm:text-sm font-extrabold text-indigo-300 uppercase tracking-wider">
+                Customize Your Inputs (Auto-Injects Into Prompt)
+              </h3>
+            </div>
+            <span class="text-[11px] text-emerald-400 font-bold">⚡ Live Sync</span>
           </div>
-          <div id="m-vars-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+          <div id="m-vars-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5"></div>
         </div>
 
-        <!-- Split Screen: Prompt vs Sample Output -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <div class="flex flex-col">
-            <div class="flex items-center justify-between mb-2">
-              <span id="m-prompt-label" class="text-xs font-extrabold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
-                <i data-lucide="terminal" class="w-4 h-4"></i> Live 5-Layer Mega-Prompt
-              </span>
-              <button onclick="copyCompiledPrompt()" class="text-xs font-bold text-indigo-400 hover:text-white flex items-center gap-1">
-                <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Prompt
-              </button>
-            </div>
-            <div id="m-live-prompt" class="flex-1 p-4 rounded-2xl bg-slate-950 border border-slate-800 text-xs sm:text-sm text-slate-100 font-mono-code whitespace-pre-wrap leading-relaxed max-h-96 overflow-y-auto"></div>
+        <!-- Step 2: Expected Beginner-Friendly Output Preview -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span id="m-output-label" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Expected Beginner-Friendly Output (With Relatable Example)
+            </span>
           </div>
-
-          <div class="flex flex-col">
-            <div class="flex items-center justify-between mb-2">
-              <span id="m-output-label" class="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                <i data-lucide="sparkles" class="w-4 h-4"></i> Beginner-Friendly Output Preview
-              </span>
-            </div>
-            <div id="m-output-preview" class="flex-1 p-4 rounded-2xl bg-slate-950 border border-emerald-500/30 text-xs sm:text-sm text-slate-200 whitespace-pre-wrap leading-relaxed font-medium max-h-96 overflow-y-auto"></div>
-          </div>
+          <div id="m-output-preview" class="p-4 rounded-2xl obsidian-terminal border border-emerald-500/30 text-xs sm:text-sm text-slate-200 whitespace-pre-wrap leading-relaxed font-medium"></div>
         </div>
 
-        <!-- Bottom Action Bar -->
-        <div class="pt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
-          <button onclick="copyCompiledPrompt()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition">
-            <i data-lucide="copy" class="w-4 h-4"></i>
-            <span id="m-copy-btn-txt">Copy 5-Layer Mega-Prompt</span>
+        <!-- Step 3: Live Compiled 5-Layer Mega-Prompt -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <span id="m-prompt-label" class="text-xs font-extrabold uppercase tracking-wider text-indigo-300 flex items-center gap-1.5">
+              <i data-lucide="terminal" class="w-4 h-4"></i> Full 5-Layer Mega-Prompt (Ready to Copy)
+            </span>
+            <button onclick="copyCompiledPrompt()" class="text-xs font-extrabold text-indigo-400 hover:text-white flex items-center gap-1">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Code
+            </button>
+          </div>
+          <div id="m-live-prompt" class="p-4 rounded-2xl obsidian-terminal text-xs sm:text-sm text-slate-100 font-mono-code whitespace-pre-wrap leading-relaxed max-h-80 overflow-y-auto"></div>
+        </div>
+
+      </div>
+
+      <!-- Sticky Bottom Launch Bar -->
+      <div class="p-4 sm:p-5 border-t border-slate-800 bg-slate-950/95 backdrop-blur-xl sticky bottom-0 z-20 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <button onclick="copyCompiledPrompt()" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-indigo-600 via-violet-600 to-fuchsia-600 hover:opacity-95 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-indigo-600/30">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+          <span id="m-copy-btn-txt">Copy 5-Layer Mega-Prompt</span>
+        </button>
+
+        <div class="flex flex-wrap items-center justify-center gap-2 w-full sm:w-auto">
+          <span id="m-open-label" class="text-xs font-bold text-slate-400 mr-1">Launch:</span>
+          <button onclick="copyAndLaunch('https://chatgpt.com')" class="px-3.5 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-extrabold flex items-center gap-1 transition">
+            ChatGPT <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
           </button>
-
-          <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
-            <span id="m-open-label" class="text-xs font-bold text-slate-300 mr-1">1-Click Launch in:</span>
-            <button onclick="copyAndLaunch('https://chatgpt.com')" class="px-4 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/40 text-xs font-extrabold flex items-center gap-1.5 transition">
-              ChatGPT <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-            <button onclick="copyAndLaunch('https://gemini.google.com')" class="px-4 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/40 text-xs font-extrabold flex items-center gap-1.5 transition">
-              Gemini <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-            <button onclick="copyAndLaunch('https://claude.ai')" class="px-4 py-2.5 rounded-xl bg-amber-600/20 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/40 text-xs font-extrabold flex items-center gap-1.5 transition">
-              Claude <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
-            </button>
-          </div>
+          <button onclick="copyAndLaunch('https://gemini.google.com')" class="px-3.5 py-2.5 rounded-xl bg-blue-500/15 hover:bg-blue-600 text-blue-300 hover:text-white border border-blue-500/30 text-xs font-extrabold flex items-center gap-1 transition">
+            Gemini <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </button>
+          <button onclick="copyAndLaunch('https://claude.ai')" class="px-3.5 py-2.5 rounded-xl bg-amber-500/15 hover:bg-amber-600 text-amber-300 hover:text-white border border-amber-500/30 text-xs font-extrabold flex items-center gap-1 transition">
+            Claude <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </button>
         </div>
       </div>
+
     </div>
   </div>
 
@@ -462,41 +435,47 @@
     let savedIds = JSON.parse(localStorage.getItem('nexa_saved_v4') || '[]');
     let activeItem = null;
     let userVars = {};
+    let currentDemoMode = 'nexa';
 
-    // Category-Specific Neon Theme Palette
+    // Category Neon Palettes
     const categoryThemes = {
       'Business & Content': {
-        accent: 'linear-gradient(90deg, #f59e0b, #ec4899)',
-        borderHover: 'rgba(245, 158, 11, 0.6)',
-        glow: 'rgba(245, 158, 11, 0.25)',
+        accent: 'linear-gradient(90deg, transparent, #f59e0b, #ec4899, transparent)',
+        border: 'rgba(245, 158, 11, 0.55)',
+        shadow: 'rgba(245, 158, 11, 0.25)',
+        spotlight: 'rgba(245, 158, 11, 0.14)',
         pill: 'bg-amber-500/15 text-amber-300 border-amber-500/30',
         icon: 'trending-up'
       },
       'Finance & Markets': {
-        accent: 'linear-gradient(90deg, #10b981, #06b6d4)',
-        borderHover: 'rgba(16, 185, 129, 0.6)',
-        glow: 'rgba(16, 185, 129, 0.25)',
+        accent: 'linear-gradient(90deg, transparent, #10b981, #06b6d4, transparent)',
+        border: 'rgba(16, 185, 129, 0.55)',
+        shadow: 'rgba(16, 185, 129, 0.25)',
+        spotlight: 'rgba(16, 185, 129, 0.14)',
         pill: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
         icon: 'bar-chart-3'
       },
       '4K Video & Image AI': {
-        accent: 'linear-gradient(90deg, #ec4899, #8b5cf6)',
-        borderHover: 'rgba(236, 72, 153, 0.6)',
-        glow: 'rgba(236, 72, 153, 0.25)',
+        accent: 'linear-gradient(90deg, transparent, #ec4899, #8b5cf6, transparent)',
+        border: 'rgba(236, 72, 153, 0.55)',
+        shadow: 'rgba(236, 72, 153, 0.25)',
+        spotlight: 'rgba(236, 72, 153, 0.14)',
         pill: 'bg-fuchsia-500/15 text-fuchsia-300 border-fuchsia-500/30',
         icon: 'film'
       },
       'Study & Research': {
-        accent: 'linear-gradient(90deg, #06b6d4, #3b82f6)',
-        borderHover: 'rgba(6, 182, 212, 0.6)',
-        glow: 'rgba(6, 182, 212, 0.25)',
+        accent: 'linear-gradient(90deg, transparent, #06b6d4, #3b82f6, transparent)',
+        border: 'rgba(6, 182, 212, 0.55)',
+        shadow: 'rgba(6, 182, 212, 0.25)',
+        spotlight: 'rgba(6, 182, 212, 0.14)',
         pill: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30',
         icon: 'graduation-cap'
       },
       'Coding & Projects': {
-        accent: 'linear-gradient(90deg, #6366f1, #a855f7)',
-        borderHover: 'rgba(99, 102, 241, 0.6)',
-        glow: 'rgba(99, 102, 241, 0.25)',
+        accent: 'linear-gradient(90deg, transparent, #6366f1, #a855f7, transparent)',
+        border: 'rgba(99, 102, 241, 0.55)',
+        shadow: 'rgba(99, 102, 241, 0.25)',
+        spotlight: 'rgba(99, 102, 241, 0.14)',
         pill: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
         icon: 'code-2'
       }
@@ -504,55 +483,96 @@
 
     const uiText = {
       en: {
-        navSubtitle: '5-Layer Prompt Engine • Simple Language + Real-Life Examples',
-        explore: 'Explore',
+        navSubtitle: '5-Layer Mega-Prompts • Explained with Real-Life Desi Examples',
+        explore: 'Bento Studio',
         saved: 'Saved',
-        heroBadge: 'Zero Jargon Engine — Every Complex Concept Explained with Desi Examples',
-        heroTitle1: 'Unlock Top 1% AI Outputs in',
-        heroDesc: 'Stop getting confusing textbook answers. Our 5-Layer Mega-Prompts force ChatGPT, Gemini & Claude to explain every technical term using relatable daily-life examples, comparison tables, and step-by-step action plans.',
-        searchPlaceholder: 'Search Mega-Prompts (e.g., Meta Ads, SEO, IPO, SIP, 4K Video, Study, SaaS)...',
-        outputPreviewLabel: 'SAMPLE OUTPUT TERMINAL',
-        inputsCountSuffix: 'Inputs',
-        openStudioBtn: 'Customize',
-        quickCopyBtn: 'Quick Copy',
-        step1Label: 'Fill Your Details Below (Auto-Updates Prompt Live)',
-        promptLabel: 'Live 5-Layer Mega-Prompt',
-        outputLabel: 'Beginner-Friendly Output Preview',
+        heroBadge: 'Zero Jargon Lock — Hard Concepts Explained Like a Friend',
+        heroTitle1: 'Turn AI Into Your Personal Mentor with',
+        heroDesc: 'Normal 1-line prompts give confusing textbook jargon. Our 5-Layer architecture forces ChatGPT, Gemini & Claude to explain every technical word using relatable shopkeeper/cricket examples + pro tables + step-by-step action plans.',
+        searchPlaceholder: 'Search Mega-Prompts (e.g., Meta Ads, SEO, IPO, SIP, 4K Video, Study)...',
+        outputPreviewLabel: 'RELATABLE OUTPUT PREVIEW',
+        inputsCountSuffix: 'Custom Inputs',
+        openStudioBtn: 'Open Studio',
+        quickCopyBtn: 'Copy',
+        step1Label: 'Customize Your Inputs (Auto-Injects Into Prompt)',
+        promptLabel: 'Full 5-Layer Mega-Prompt (Ready to Copy)',
+        outputLabel: 'Expected Beginner-Friendly Output (With Relatable Example)',
         copyBtn: 'Copy 5-Layer Mega-Prompt',
-        openInLabel: '1-Click Launch in:'
+        openInLabel: 'Launch:'
       },
       hi: {
-        navSubtitle: '5-लेयर प्रॉम्प्ट इंजन • एकदम आसान भाषा + आम जिंदगी के उदाहरण',
-        explore: 'एक्सप्लोर',
+        navSubtitle: '5-लेयर मेगा-प्रॉम्प्ट्स • एकदम आसान भाषा और देसी उदाहरणों के साथ',
+        explore: 'बेंटो स्टूडियो',
         saved: 'सेव्ड',
-        heroBadge: 'Zero Jargon इंजन — हर मुश्किल टॉपिक अब आम जिंदगी के देसी उदाहरणों के साथ',
-        heroTitle1: 'किसी भी AI से पाएं एक्सपर्ट रिजल्ट',
-        heroDesc: 'किताबी और कठिन शब्दों से छुटकारा! हमारे 5-लेयर मेगा-प्रॉम्प्ट्स AI को मजबूर करते हैं कि वह हर कठिन शब्द को दुकान, क्रिकेट या घर के आसान उदाहरण से समझाए और पूरा प्रैक्टिकल एक्शन प्लान दे।',
+        heroBadge: 'Zero Jargon इंजन — हर कठिन शब्द अब आम जिंदगी के उदाहरण के साथ',
+        heroTitle1: 'AI को बनाएं अपना पर्सनल एक्सपर्ट मेंटर',
+        heroDesc: 'साधारण 1-लाइन के प्रॉम्प्ट्स हमेशा किताबी और कठिन जवाब देते हैं। हमारे 5-लेयर मेगा-प्रॉम्प्ट्स AI को मजबूर करते हैं कि वह हर मुश्किल बात को दुकान या क्रिकेट के आसान उदाहरण, तुलनात्मक टेबल और स्टेप-बाय-स्टेप प्लान के साथ समझाए।',
         searchPlaceholder: 'मेगा-प्रॉम्प्ट सर्च करें (जैसे: Meta Ads, SEO, IPO, SIP, 4K Video, Study)...',
-        outputPreviewLabel: 'सैंपल आउटपुट प्रीव्यू',
-        inputsCountSuffix: 'इनपुट्स',
-        openStudioBtn: 'Customize',
-        quickCopyBtn: 'Quick Copy',
-        step1Label: 'नीचे अपनी जानकारी भरें (प्रॉम्प्ट अपने आप तैयार हो जाएगा)',
-        promptLabel: 'पूरा 5-Layer Mega-Prompt',
-        outputLabel: 'आसान उदाहरण वाला आउटपुट प्रीव्यू',
+        outputPreviewLabel: 'आसान उदाहरण + आउटपुट प्रीव्यू',
+        inputsCountSuffix: 'कस्टम इनपुट्स',
+        openStudioBtn: 'Open Studio',
+        quickCopyBtn: 'Copy',
+        step1Label: 'अपनी जानकारी भरें (प्रॉम्प्ट अपने आप तैयार हो जाएगा)',
+        promptLabel: 'पूरा 5-Layer Mega-Prompt (कॉपी करने के लिए तैयार)',
+        outputLabel: 'Expected Output (देसी उदाहरण और टेबल के साथ)',
         copyBtn: 'Copy 5-Layer Mega-Prompt',
-        openInLabel: '1-Click में खोलें:'
+        openInLabel: 'सीधे खोलें:'
       }
     };
+
+    // Interactive Before/After Switcher Data
+    function switchDemoMode(mode) {
+      currentDemoMode = mode;
+      const btnNormal = document.getElementById('demo-btn-normal');
+      const btnNexa = document.getElementById('demo-btn-nexa');
+      const box = document.getElementById('demo-box-content');
+
+      if (mode === 'normal') {
+        btnNormal.className = 'px-2.5 py-1 rounded-lg text-[11px] font-extrabold bg-rose-600 text-white shadow transition';
+        btnNexa.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-white transition';
+        box.innerHTML = `
+          <div>
+            <div class="text-[11px] font-bold text-rose-400 mb-1">❌ User Typed: "How to run Meta Ads & SEO?"</div>
+            <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-slate-300 font-mono-code leading-relaxed">
+              "To succeed in Meta Ads, optimize your CBO pixel attribution, improve SERP topical authority, lower CPA via lookalike cohorts, and monitor ROAS elasticity..."
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-2 text-[11px] text-rose-300 font-bold">
+            <span>⚠️ Result: Confusing textbook words!</span>
+            <span>Beginner Clarity: 15%</span>
+          </div>
+        `;
+      } else {
+        btnNexa.className = 'px-2.5 py-1 rounded-lg text-[11px] font-extrabold bg-emerald-600 text-white shadow transition';
+        btnNormal.className = 'px-2.5 py-1 rounded-lg text-[11px] font-bold text-slate-400 hover:text-white transition';
+        box.innerHTML = `
+          <div>
+            <div class="text-[11px] font-bold text-emerald-400 mb-1">⚡ With Nexa 5-Layer Mega-Prompt:</div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-slate-100 font-mono-code leading-relaxed">
+              "🏪 1. दुकान का उदाहरण: SEO आपकी दुकान का मेन रोड का बोर्ड है, और Meta Ads वो स्मार्ट लड़का है जो सिर्फ सही ग्राहकों को पर्चा देता है।\n📊 2. Pixel = आपकी दुकान का CCTV कैमरा जो याद रखता है कौन आया था..."
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-2 text-[11px] text-emerald-300 font-extrabold">
+            <span>✅ Simple Analogy + Table + 30-Day Plan</span>
+            <span>Clarity: 100%</span>
+          </div>
+        `;
+      }
+    }
 
     const builtInPrompts = [
       {
         id: 'mp9',
+        featured: true,
         category: 'Business & Content',
-        badge: '📈 Beginner to Pro',
+        badge: '🔥 Spotlight #1 • Beginner to Pro',
         model: 'Gemini • ChatGPT • Claude',
         title: {
           en: 'Meta Ads & SEO: Zero-to-Hero Practical Mastery Engine',
           hi: 'Meta Ads और SEO: जीरो से एडवांस मास्टरी (आसान उदाहरण के साथ)'
         },
         desc: {
-          en: 'Learn and run profitable Facebook/Instagram Ads & Google SEO from scratch. Explains every technical metric (ROAS, CTR, Pixel, Keywords) using simple shopkeeper examples.',
+          en: 'Learn and run profitable Facebook/Instagram Ads & Google SEO from absolute zero. Explains every technical metric (ROAS, CTR, Pixel, Keywords) using simple shopkeeper examples.',
           hi: 'अगर आपको Meta Ads या SEO का बिल्कुल भी अंदाजा नहीं है, तो यह प्रॉम्प्ट आपको आम दुकान के उदाहरण से बेसिक समझाकर एडवांस लेवल तक कैंपेन चलाना सिखाएगा।'
         },
         content: `[SYSTEM ROLE: FRIENDLY GROWTH MENTOR & CMO]
@@ -582,7 +602,7 @@ Act as a world-class Digital Marketing Mentor who has scaled brands from zero, b
       {
         id: 'mp1',
         category: 'Finance & Markets',
-        badge: '🔥 Simple + Deep',
+        badge: '📈 Simple + Deep',
         model: 'Gemini • ChatGPT • Perplexity',
         title: {
           en: 'IPO & Stock 360° Checkup (In Simple Everyday Language)',
@@ -620,14 +640,14 @@ Act as a top Equity Research Analyst who explains stock market and IPO numbers i
       {
         id: 'mp2',
         category: 'Finance & Markets',
-        badge: '⭐ Wealth Guide',
+        badge: '🏏 Wealth Guide',
         model: 'Gemini • Claude • ChatGPT',
         title: {
           en: 'Mutual Fund & SIP Portfolio Health Check (Beginner Friendly)',
           hi: 'म्यूचुअल फंड SIP पोर्टफोलियो चेकअप (आसान भाषा में)'
         },
         desc: {
-          en: 'Check if your Mid-Cap, Small-Cap, Flexi-Cap, and Gold ETF SIPs are on the right track. Explains overlap, crash safety, and compounding using simple household examples.',
+          en: 'Check if your Mid-Cap, Small-Cap, Flexi-Cap, and Gold ETF SIPs are on the right track. Explains overlap, crash safety, and compounding using a Cricket Team analogy.',
           hi: 'अपने Mid-Cap, Small-Cap, Flexi-Cap और Gold ETF का पूरा हिसाब एकदम सरल भाषा और क्रिकेट टीम के उदाहरण से समझें कि कहाँ बदलाव करना चाहिए।'
         },
         content: `[SYSTEM ROLE: FRIENDLY WEALTH COACH & PORTFOLIO PLANNER]
@@ -692,8 +712,9 @@ Act as an expert AI Video & Image Prompt Engineer for Google Veo, Sora, Kling AI
       },
       {
         id: 'mp4',
+        featured: true,
         category: 'Study & Research',
-        badge: '🎓 Explain Like I am 12',
+        badge: '🎓 Spotlight #2 • Explain Like I am 12',
         model: 'Gemini • ChatGPT • Claude',
         title: {
           en: 'Learn Any Hard Topic 5x Faster (Desi Example + Exam Mastery)',
@@ -892,6 +913,17 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
       }
     }
 
+    // Attach Radial Mouse/Touch Spotlight Tracking to All Bento Cards
+    function attachSpotlightListeners() {
+      document.querySelectorAll('.bento-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+          card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        });
+      });
+    }
+
     function quickSearch(term) {
       document.getElementById('search-box').value = term;
       renderPromptGrid();
@@ -901,11 +933,11 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
       currentLang = lang;
       const t = uiText[lang];
       document.getElementById('lang-en').className = lang === 'en'
-        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition-all'
-        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition-all';
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
       document.getElementById('lang-hi').className = lang === 'hi'
-        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition-all'
-        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition-all';
+        ? 'px-2.5 py-1 rounded-lg text-xs font-extrabold bg-indigo-600 text-white transition'
+        : 'px-2.5 py-1 rounded-lg text-xs font-bold text-slate-400 hover:text-white transition';
 
       document.getElementById('nav-subtitle').innerText = t.navSubtitle;
       document.getElementById('txt-explore').innerText = t.explore;
@@ -927,9 +959,9 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
       currentCategory = cat;
       document.querySelectorAll('.cat-btn').forEach(btn => {
         if (btn.dataset.cat === cat) {
-          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition-all scale-105';
+          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-indigo-600 text-white shadow-lg shadow-indigo-600/30 transition scale-105';
         } else {
-          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-200 border border-slate-800 hover:border-indigo-400/60 transition-all';
+          btn.className = 'cat-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900/90 text-slate-300 border border-slate-800 hover:border-indigo-400/50 transition';
         }
       });
       renderPromptGrid();
@@ -938,11 +970,11 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
     function setSavedFilter(onlySaved) {
       showSavedOnly = onlySaved;
       document.getElementById('btn-explore').className = !onlySaved
-        ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white flex items-center gap-1.5 shadow-lg shadow-indigo-600/30 transition-all'
-        : 'px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900/90 text-slate-200 border border-slate-700/80 flex items-center gap-1.5 transition-all';
+        ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white flex items-center gap-1.5 shadow-lg shadow-indigo-600/30 transition'
+        : 'px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900/90 text-slate-200 border border-slate-800 flex items-center gap-1.5 transition';
       document.getElementById('btn-saved').className = onlySaved
-        ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white flex items-center gap-1.5 shadow-lg shadow-indigo-600/30 transition-all'
-        : 'px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900/90 text-slate-200 border border-slate-700/80 flex items-center gap-1.5 transition-all';
+        ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold bg-indigo-600 text-white flex items-center gap-1.5 shadow-lg shadow-indigo-600/30 transition'
+        : 'px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-900/90 text-slate-200 border border-slate-800 flex items-center gap-1.5 transition';
       renderPromptGrid();
     }
 
@@ -1000,9 +1032,9 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
         grid.innerHTML = `
           <div class="col-span-full bento-card rounded-3xl p-12 text-center">
             <h3 class="text-xl font-extrabold text-white mb-2">No matching Mega-Prompts found</h3>
-            <p class="text-xs sm:text-sm text-slate-400 mb-5">Try another search term or view all 9 studio prompts.</p>
+            <p class="text-xs sm:text-sm text-slate-400 mb-5">Try another search keyword or reset filters.</p>
             <button onclick="setCategory('All'); setSavedFilter(false); resetSearch();" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-xs sm:text-sm font-extrabold">
-              Reset Filters
+              Show All Prompts
             </button>
           </div>
         `;
@@ -1016,76 +1048,83 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
         const descText = item.desc[currentLang] || item.desc.en;
         const outText = item.sampleOutput[currentLang] || item.sampleOutput.en;
         const theme = categoryThemes[item.category] || categoryThemes['Coding & Projects'];
-        const delayMs = idx * 65;
+        const delayMs = idx * 55;
+
+        // Asymmetric Bento Span: Featured cards span 2 columns when viewing All without search filter
+        const isWideBento = item.featured && currentCategory === 'All' && !q && !showSavedOnly;
+        const spanClass = isWideBento ? 'md:col-span-2 lg:col-span-2' : 'col-span-1';
 
         return `
           <div
             onclick="openStudioModal('${item.id}')"
-            style="--card-accent: ${theme.accent}; --card-border-hover: ${theme.borderHover}; --card-glow: ${theme.glow}; animation-delay: ${delayMs}ms;"
-            class="bento-card rounded-3xl p-6 flex flex-col justify-between cursor-pointer group"
+            style="--card-accent: ${theme.accent}; --card-border: ${theme.border}; --card-shadow: ${theme.shadow}; --card-spotlight: ${theme.spotlight}; animation-delay: ${delayMs}ms;"
+            class="bento-card ${spanClass} rounded-3xl p-6 flex flex-col justify-between cursor-pointer group"
           >
             <div>
-              <!-- Card Top Header -->
-              <div class="flex items-center justify-between gap-2 mb-4">
+              <!-- Top Badges Row -->
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
                 <span class="text-[11px] font-extrabold px-3 py-1 rounded-full border flex items-center gap-1.5 ${theme.pill}">
                   <i data-lucide="${theme.icon}" class="w-3.5 h-3.5"></i>
                   ${item.category}
                 </span>
                 <div class="flex items-center gap-1.5">
-                  <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-slate-900/90 text-slate-200 border border-slate-700/80">
+                  <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-black/70 text-slate-200 border border-slate-800">
                     ${item.badge}
                   </span>
-                  <button onclick="toggleSave('${item.id}', event)" class="p-2 rounded-xl bg-slate-950/90 border border-slate-800 ${isSaved ? 'text-amber-400 border-amber-500/40' : 'text-slate-400 hover:text-white'} transition">
+                  <button onclick="toggleSave('${item.id}', event)" class="p-2 rounded-xl bg-black/80 border border-slate-800 ${isSaved ? 'text-amber-400 border-amber-500/40' : 'text-slate-400 hover:text-white'} transition">
                     <i data-lucide="bookmark" class="w-4 h-4 ${isSaved ? 'fill-amber-400' : ''}"></i>
                   </button>
                 </div>
               </div>
 
-              <!-- Title & Description -->
-              <h3 class="text-lg sm:text-xl font-extrabold text-white group-hover:text-indigo-300 transition-colors mb-2 leading-snug">
-                ${titleText}
-              </h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 font-medium">
-                ${descText}
-              </p>
-
-              <!-- macOS Terminal Style Sample Output Box -->
-              <div class="terminal-box rounded-2xl p-3.5 mb-5">
-                <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
-                    <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400 ml-1.5">
-                      ${t.outputPreviewLabel}
-                    </span>
-                  </div>
-                  <span class="text-[10px] font-semibold text-slate-400">${item.model}</span>
+              <!-- Asymmetric Layout Inside Wide Spotlight Cards vs Standard Cards -->
+              <div class="${isWideBento ? 'grid grid-cols-1 lg:grid-cols-12 gap-5 items-center' : ''}">
+                <div class="${isWideBento ? 'lg:col-span-6' : ''}">
+                  <h3 class="${isWideBento ? 'text-xl sm:text-2xl' : 'text-lg sm:text-xl'} font-extrabold text-white group-hover:text-indigo-300 transition-colors mb-2.5 leading-snug">
+                    ${titleText}
+                  </h3>
+                  <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4 font-medium">
+                    ${descText}
+                  </p>
                 </div>
-                <p class="text-xs text-slate-200 line-clamp-3 leading-relaxed font-mono-code">
-                  ${outText}
-                </p>
+
+                <!-- Obsidian Terminal Sample Output Preview -->
+                <div class="${isWideBento ? 'lg:col-span-6' : ''} obsidian-terminal rounded-2xl p-3.5 mb-4">
+                  <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80">
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></span>
+                      <span class="text-[10px] font-extrabold uppercase tracking-wider text-emerald-400 ml-1">
+                        ${t.outputPreviewLabel}
+                      </span>
+                    </div>
+                    <span class="text-[10px] font-semibold text-slate-400">${item.model}</span>
+                  </div>
+                  <p class="text-xs text-slate-200 line-clamp-3 leading-relaxed font-mono-code">
+                    ${outText}
+                  </p>
+                </div>
               </div>
             </div>
 
-            <!-- Card Footer with Dual Action Buttons -->
+            <!-- Card Footer -->
             <div class="pt-3.5 border-t border-slate-800/80 flex items-center justify-between gap-2">
-              <div class="flex items-center gap-1.5 text-[11px] font-bold text-slate-300">
-                <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
-                <span>5-Layer • ${vars.length} ${t.inputsCountSuffix}</span>
+              <div class="flex items-center gap-2 text-[11px] font-bold text-slate-300">
+                <span class="px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">5-Layer</span>
+                <span>${vars.length} ${t.inputsCountSuffix}</span>
               </div>
 
               <div class="flex items-center gap-2">
                 <button
                   onclick="quickCopyCard('${item.id}', event)"
                   class="px-3 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-bold flex items-center gap-1 transition"
-                  title="Quick Copy Prompt"
                 >
                   <i data-lucide="copy" class="w-3.5 h-3.5 text-indigo-400"></i>
                   <span>${t.quickCopyBtn}</span>
                 </button>
-                <span class="px-3.5 py-2 rounded-xl bg-indigo-600 group-hover:bg-indigo-500 text-white text-xs font-extrabold transition-all flex items-center gap-1 shadow-md shadow-indigo-600/30">
-                  ${t.openStudioBtn} <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                <span class="px-4 py-2 rounded-xl bg-indigo-600 group-hover:bg-indigo-500 text-white text-xs font-extrabold transition flex items-center gap-1 shadow-lg shadow-indigo-600/30">
+                  ${t.openStudioBtn} <i data-lucide="panel-right-open" class="w-3.5 h-3.5"></i>
                 </span>
               </div>
             </div>
@@ -1094,6 +1133,7 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
       }).join('');
 
       if (window.lucide) lucide.createIcons();
+      attachSpotlightListeners();
     }
 
     function openStudioModal(id) {
@@ -1117,12 +1157,12 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
         varsSec.classList.remove('hidden');
         varsGrid.innerHTML = vars.map(v => `
           <div>
-            <label class="text-xs font-extrabold text-slate-200 block mb-1.5">${v.replace(/_/g, ' ')}</label>
+            <label class="text-[11px] font-extrabold text-slate-300 uppercase tracking-wider block mb-1">${v.replace(/_/g, ' ')}</label>
             <input
               type="text"
               oninput="onVarInput('${v}', this.value)"
-              placeholder="Type ${v.toLowerCase().replace(/_/g, ' ')}..."
-              class="w-full px-3.5 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+              placeholder="Enter ${v.toLowerCase().replace(/_/g, ' ')}..."
+              class="w-full px-3.5 py-2.5 bg-black/80 border border-slate-700 rounded-xl text-xs sm:text-sm text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
             />
           </div>
         `).join('');
@@ -1195,6 +1235,7 @@ Build a clear, zero-fluff business and earning blueprint for my idea: [BUSINESS_
       setTimeout(() => t.classList.add('hidden'), 2600);
     }
 
+    switchDemoMode('nexa');
     setLanguage('en');
     syncLiveGitHubPrompts();
   </script>
